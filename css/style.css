@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
+
+/* Start Variables */
+:root {
+	--dark-green: #2d723f;
+	--light-green: #84a966;
+	--light-gray: #d9d9d9;
+	--dark-gray: #aaaaaa;
+}
+/* End Variables */
+
+/* Start General */
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	font-family: 'Karla', sans-serif;
+}
+/* End General */
+
+/* Start Index Page */
+.container {
+	position: relative;
+	overflow-y: hidden;
+	height: 100vh;
+}
+.f_shape {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.logoImage {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-26%, -55%);
+}
+
+/* End Index Page */
