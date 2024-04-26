@@ -45,12 +45,14 @@ create table students
     revision_sura_end_number varchar(5),
     behavior varchar(250),
     attend bool default false,
-    parent_id int not null,
+    parent_id int ,
 	admin_id int not null ,
-    teacher_id int not null,
+    teacher_id int ,
 	foreign key (teacher_id) references teachers(id) ,
     foreign key (admin_id) references admins(id),
     foreign key (parent_id) references parents(id) 
 );
-
+select * from admins
+select * from parents;
+select * from students
 
