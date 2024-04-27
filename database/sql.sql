@@ -52,7 +52,9 @@ create table students
     foreign key (admin_id) references admins(id),
     foreign key (parent_id) references parents(id) 
 );
-select * from admins
+select * from admins;
 select * from parents;
-select * from students
+select * from students;
+select * from teachers;
+
 

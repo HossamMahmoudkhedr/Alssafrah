@@ -1,9 +1,9 @@
 <?php
 include "../includes/connection.php";
 include "../includes/apiResponse.php";
-session_start();
 $expireTime = 3600 * 24; // 24 hour
 session_set_cookie_params($expireTime);
+session_start();
 if($_SERVER['REQUEST_METHOD'] === 'POST')
 {
    //$email=$_POST['email'];
@@ -21,32 +21,38 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
     }
     if(!isset($_POST['password'])|| empty($_POST['password']))
         $errors[]=['password'=>'required'];
+    if(!isset($_POST['type'])|| empty($_POST['type']))
+    $errors[]=['type'=>'type must be provided'];
+    else if($_POST['type']!='teacher'&&$_POST['type']!='Teacher')
+    {
+        $errors[]=['security'=>'unauthorized'];
+    }
     if(!empty($errors))
     {
         return ValidationResponse("validation errors",$errors);
     }
     $password=$_POST['password'];
-    // get the admin email
-    $query="SELECT * FROM admins WHERE email = ?";
+    // get the teacher email
+    $query="SELECT * FROM teachers WHERE email = ?";
     $stm= mysqli_prepare($con,$query);
     if($stm)
     {
         mysqli_stmt_bind_param($stm,'s',$email);
         mysqli_stmt_execute($stm);
         $result = mysqli_stmt_get_result($stm);
-        $admin = mysqli_fetch_assoc($result);
-        if(!$admin)
+        $teacher = mysqli_fetch_assoc($result);
+        if(!$teacher)
         {
-            return FailedResponse('Failed to login admin in correct password or email ');
+            return FailedResponse('Failed to login teacher in correct password or email ');
         }
-        if(!password_verify($password,$admin['password']))
+        if(!password_verify($password,$teacher['password']))
         {
-            return FailedResponse('Failed to login admin in correct password or email');
+            return FailedResponse('Failed to login teacher in correct password or email');
         }
-        $_SESSION['admin_email'] =$admin['email'];//log the admin and save the valus of important things
-        $_SESSION['type']='admin';
-        unset($admin['password']);//remove the password from the api response  
-        $admin['type']='admin';
-       return SuccessResponse("Done",$admin);
+        $_SESSION['teacher_email'] =$teacher['email'];//log the teacher and save the valus of important things
+        $_SESSION['type']='teacher';
+        unset($teacher['password']);//remove the password from the api response  
+        $teacher['type']='teacher';
+       return SuccessResponse("Done",$teacher);
     }
 }

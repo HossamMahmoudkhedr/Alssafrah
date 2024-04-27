@@ -49,7 +49,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
         {
             return FailedResponse('Failed to login admin in correct password or email');
         }
-        $_SESSION['admin_email'] =$admin['email'];//log the admin and save the valus of important things
+        $_SESSION['id'] =$admin['id'];//log the admin and save the valus of important things
         $_SESSION['type']='admin';
         unset($admin['password']);//remove the password from the api response  
         $admin['type']='admin';
