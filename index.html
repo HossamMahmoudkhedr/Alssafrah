@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html
+	lang="ar"
+	dir="rtl">
 	<head>
 		<meta charset="UTF-8" />
 		<meta
@@ -9,26 +11,138 @@
 		<link
 			rel="stylesheet"
 			href="./css/style.css" />
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+			crossorigin="anonymous" />
 	</head>
 	<body>
-		<div class="container">
-			<span class="f_shape">
-				<div class="logoImage">
-					<img
-						src="./assets/images/السفرة 3.png"
-						alt="" />
+		<div
+			class="container-fluid p-0 d-flex justify-content-between overflow-y-hidden align-items-center">
+			<!-- Start Right Side -->
+			<div class="f_shape w-50 d-flex">
+				<div class="position-relative">
+					<div class="logoImage position-absolute top-50 translate-middle">
+						<img
+							class="object-fit-cover"
+							src="./assets/images/السفرة 3.png"
+							alt="" />
+					</div>
+					<span class="d-block position-absolute top-0 end-0 h-100 w-100">
+						<svg
+							width="1275"
+							height="832"
+							viewBox="0 0 1275 832"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg">
+							<path
+								d="M608 72.4465C765 -120.548 1275 0.446529 1275 0.446529V832.447H0C0 832.447 432 836.446 562 682.447C692 528.447 451 265.441 608 72.4465Z"
+								fill="#84A966" />
+						</svg>
+					</span>
 				</div>
-				<svg
-					width="1275"
-					height="832"
-					viewBox="0 0 1275 832"
-					fill="none"
-					xmlns="http://www.w3.org/2000/svg">
-					<path
-						d="M608 72.4465C765 -120.548 1275 0.446529 1275 0.446529V832.447H0C0 832.447 432 836.446 562 682.447C692 528.447 451 265.441 608 72.4465Z"
-						fill="#84A966" />
-				</svg>
-			</span>
+			</div>
+			<!-- End Right Side -->
+			<!-- Start Left side -->
+			<div class="position-relative w-50">
+				<div class="d-flex flex-column align-items-center gap-5">
+					<a
+						class="registration_button"
+						href="./pages/teacherLogin.html">
+						<p>معلم</p>
+						<span
+							><svg
+								width="61"
+								height="60"
+								viewBox="0 0 61 60"
+								fill="none"
+								xmlns="http://www.w3.org/2000/svg"
+								xmlns:xlink="http://www.w3.org/1999/xlink">
+								<rect
+									x="0.969238"
+									width="59.9163"
+									height="60"
+									fill="url(#pattern0_1_386)" />
+								<defs>
+									<pattern
+										id="pattern0_1_386"
+										patternContentUnits="objectBoundingBox"
+										width="1"
+										height="1">
+										<use
+											xlink:href="#image0_1_386"
+											transform="matrix(0.0166667 0 0 0.0166434 0 0.000697645)" />
+									</pattern>
+									<image
+										id="image0_1_386"
+										width="60"
+										height="60"
+										xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAADh0lEQVRoQ+2aT0hVQRTGvyNYYUW8OVcoxSLaVVCr/iCtiiCQNu0qaSMKgRZB67RtQVmtqpWUq3YmtQjaSNhOSLdWZGIwcx9oJa/FOzF1lddT37vXO/l0vHf3Hmdmzm++MzPnzL2ETfbQJuNFBuy74pnCmcLRDIjIVmNMFxFdBHA4+ntcRJ4z82MiKmyEyYoV0lrrZiIaBnBkBagxEWkLguDreoeuCmyVDcPwfQXYBcYxpdSJcqWNMbLGkzBFRJ1KqVfLjVsVWGvdQ0T9cZwWke4gCB6V2tYA2A7/hZn3rgrYGGPVPRYHGMAoM59cB8Bg5mXFrKqwMWYOwI6YwN+ZeedmAp5l5l0xJ8epWfnSSaNwqpB2SlWhM2fAWutuInoQx/HlNq047VzYOAOOjqVRAEerOGaPpeNE9MsFQNI+nAHbgaPE42UF6JonHk6BLbSIbDHGdBLRpZLU8oOIDEapZU2UXYgE58BJQ6ySvYhQPp/vFJE+EakjoqvM/CLNGOsWOJ/P7ysWi08BnCkB1Mzc6BVwiap3APyTnAD4xsy7vQFeQdUFvjm7LyilhtYNsDGmBcA9AGeXUSeNn2/q6uo6crnc5zSd2LbO1nAEOwZApXWqpL1V9WYul7MXB07KR5fAdve84BDWmaqVipQ0ufSsozCeJqLbLlX9X8BJQ25YRLrW+rrHZUgnBW5h5imHSyBWVzUDXmntxPI6hVEGnOKKJ1FIZwqnCNMkTbOQzkL6b7zEuaZNtYZrdBFv2T7ZOrv8DYTPwBZ6iplt4bP4ZMDlO2PSkCw/lpK2T7IzV7H9CMBeHb12ofC5qJMlb+hqdQ7HnajVhPQ8MzdERfc8gG2lg/kIPM3MzRHwNIA9vgNPMPOfTx6MMRMADvoOPMLMpyLgEQCtXgOLyFAQBOctpNZ6iIjavAYmogGl1BULGYbhgIi0ew0MoJ+Zr0chfR/ANd+Be5m5LwK+BaDXa2AR6QmC4GG0hpd84ePdOUxE7UqpZxFwu13TXitsd2WllP0qz25abXbX9hrYnrvM/C4CbhURexYvPt6FtH37z8w2w7KZ1iEA474BTwLYH0HNFwqFoKmp6af9PTMzs72+vl6XFBCTzHwgbuVSC7uq1ZLW+jQRPQHQQEQ3lFKDpY6GYXhZRO4C+FEsFjsaGxvf1gIk7phVgeN2tFHsMuCNotRq/cwUXu3MbZR2m07h37eaBVs+0t3YAAAAAElFTkSuQmCC" />
+								</defs>
+							</svg>
+						</span>
+					</a>
+					<a
+						class="registration_button"
+						href="./pages/studentLogin.html">
+						<p>طالب</p>
+						<span
+							><svg
+								width="60"
+								height="61"
+								viewBox="0 0 60 61"
+								fill="none"
+								xmlns="http://www.w3.org/2000/svg"
+								xmlns:xlink="http://www.w3.org/1999/xlink">
+								<rect
+									y="0.791992"
+									width="60"
+									height="60"
+									fill="url(#pattern0_1_385)" />
+								<defs>
+									<pattern
+										id="pattern0_1_385"
+										patternContentUnits="objectBoundingBox"
+										width="1"
+										height="1">
+										<use
+											xlink:href="#image0_1_385"
+											transform="scale(0.0166667)" />
+									</pattern>
+									<image
+										id="image0_1_385"
+										width="60"
+										height="60"
+										xlink:href="data:image/png;base64,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" />
+								</defs>
+							</svg>
+						</span>
+					</a>
+					<a
+						class="registration_button"
+						href="./pages/parentLogin.html">
+						<p>تسجيل</p>
+						<span
+							><svg
+								width="60"
+								height="59"
+								viewBox="0 0 60 59"
+								fill="none"
+								xmlns="http://www.w3.org/2000/svg">
+								<path
+									d="M30 51.625V46.7083H47.5V12.2917H30V7.375H47.5C48.875 7.375 50.0521 7.85642 51.0312 8.81927C52.0104 9.78212 52.5 10.9396 52.5 12.2917V46.7083C52.5 48.0604 52.0104 49.2179 51.0312 50.1807C50.0521 51.1436 48.875 51.625 47.5 51.625H30ZM25 41.7917L21.5625 38.2271L27.9375 31.9583H7.5V27.0417H27.9375L21.5625 20.7729L25 17.2083L37.5 29.5L25 41.7917Z"
+									fill="white" />
+							</svg>
+						</span>
+					</a>
+				</div>
+			</div>
+			<!-- End Left side -->
 		</div>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+			crossorigin="anonymous"></script>
 	</body>
 </html>

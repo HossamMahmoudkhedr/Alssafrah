@@ -1,0 +1,9 @@
+body {
+	background-color: var(--light-green) !important;
+}
+
+@media (max-width: 1200px) {
+	body {
+		background-color: white !important;
+	}
+}

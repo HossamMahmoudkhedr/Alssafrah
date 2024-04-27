@@ -5,7 +5,9 @@
 	--dark-green: #2d723f;
 	--light-green: #84a966;
 	--light-gray: #d9d9d9;
+	--gray: #cdcdcd;
 	--dark-gray: #aaaaaa;
+	--very-dark-gray: #979797;
 }
 /* End Variables */
 
@@ -14,27 +16,182 @@
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
-	font-family: 'Karla', sans-serif;
+	font-family: 'Karla', sans-serif !important;
 }
+
+body a {
+	text-decoration: none !important;
+	color: black;
+}
+
+.login_form {
+	position: relative;
+	z-index: 1;
+}
+.login_form h2 {
+	color: var(--light-green);
+}
+
+form {
+	width: 70%;
+	display: flex;
+	gap: 0.5rem;
+	flex-direction: column;
+}
+form > div {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	margin-bottom: 2rem;
+}
+form > div div {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+form > div div label {
+	color: var(--very-dark-gray);
+}
+
+form > div div input {
+	outline: none;
+	border: 1px solid var(--gray);
+	border-radius: 0.5rem;
+	padding: 0.7rem;
+}
+
+form button {
+	width: 100%;
+	background-color: var(--light-green);
+	color: white;
+	font-weight: bold;
+	padding: 1rem 2rem;
+	border-radius: 0.5rem;
+	font-size: 1.25rem;
+	outline: none;
+	border: none;
+}
+
+form a {
+	color: var(--light-green);
+	text-align: center;
+}
+
+.back {
+	background-color: var(--dark-green);
+	position: relative;
+	padding: 1.01rem 1.5rem;
+	font-size: 1.75rem;
+}
+.back::after {
+	content: '';
+	position: absolute;
+	left: 100%;
+	top: 0px;
+	width: 0;
+	height: 0;
+	border-top: 37px solid transparent;
+	border-bottom: 37px solid transparent;
+	border-left: 37px solid var(--dark-green);
+}
+
 /* End General */
 
 /* Start Index Page */
-.container {
-	position: relative;
-	overflow-y: hidden;
+.f_shape {
 	height: 100vh;
 }
-.f_shape {
-	position: absolute;
-	top: 0;
-	right: 0;
+
+.f_shape span {
+	z-index: -1;
 }
 
-.logoImage {
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	transform: translate(-26%, -55%);
+.registration_button {
+	display: flex;
+	align-items: center;
+	gap: 4rem;
+	background-color: var(--dark-green);
+	border-radius: 0.75rem;
+	padding: 1.25rem 3rem 1.25rem 1.5rem;
+}
+.registration_button p {
+	font-size: 1.875rem;
 }
 
 /* End Index Page */
+
+/* Start teacher login page */
+
+.s_shape {
+	z-index: 0;
+}
+
+.left-side-icon {
+	display: flex;
+	height: 100vh;
+}
+/* End teacher login page */
+
+/* Start Achievements page */
+.sidebar {
+	width: 20%;
+	height: 100vh;
+	background-color: var(--light-green);
+}
+.content {
+	width: 80%;
+}
+.sidebar_items a {
+	background-color: rgba(0, 0, 0, 0.05);
+	padding: 1.5rem 0;
+}
+.sidebar_items a.chosen {
+	background-color: rgba(0, 0, 0, 0.15);
+}
+/* End Achievements page */
+
+/* Start Media Query */
+@media (min-width: 1550px) {
+	/* Start Media Query for Teacher Login Page */
+	.left-side-icon {
+		height: unset;
+	}
+	/* End Media Query for Teacher Login Page */
+}
+@media (max-width: 1200px) {
+	/* Start Media Query for Index Page */
+	.f_shape {
+		display: none;
+	}
+	.registration {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+	}
+	.registration_buttons {
+		position: unset;
+		transform: unset;
+	}
+	/* End Media Query for Index Page */
+
+	/* Start Media Query for Teacher Login Page */
+	.left-side-icon {
+		display: none !important;
+	}
+	.login div > div {
+		width: 100% !important;
+	}
+	form {
+		width: 100%;
+	}
+	.back {
+		margin-top: 3rem;
+	}
+	/* End Media Query for Teacher Login Page */
+}
+
+@media (max-width: 768px) {
+}
+/* End Media Query */
