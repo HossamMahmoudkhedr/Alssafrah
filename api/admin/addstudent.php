@@ -74,6 +74,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
             mysqli_stmt_execute($stm_parent);
             $result_parent = mysqli_stmt_get_result($stm_parent);
             $parent=mysqli_fetch_assoc($result_parent);
+            if($parent)
+            {
             // If there are parent phone with the same parent_phone
             $parent_id=$parent['id'];
             if($result_parent->num_rows==1)
@@ -85,7 +87,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
                     mysqli_stmt_execute($stm_insert_student);
                 }
             }
-            
+            }
         }
         return SuccessResponse("student successfully added");
     }
