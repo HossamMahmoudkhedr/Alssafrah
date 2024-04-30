@@ -37,7 +37,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
         {
             return FailedResponse('Failed to login student incorrect password or phone $password');
         }
-        $_SESSION['student_ssn'] =$student['ssn'];//log the student and save the valus of important things
+        $_SESSION['id'] =$student['id'];//log the student and save the valus of important things
         $_SESSION['type']='student';
         $parent['type']='student';
        return SuccessResponse("Done",$student);

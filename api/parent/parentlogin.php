@@ -44,7 +44,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
         {
             return FailedResponse("Failed to login parent incorrect password or phone $password");
         }
-        $_SESSION['parent_phone'] =$parent['phone'];//log the parent and save the valus of important things
+        $_SESSION['id'] =$parent['id'];//log the parent and save the valus of important things
         $_SESSION['type']='parent';
         unset($parent['password']);//remove the password from the api response  
         $parent['type']='parent';
