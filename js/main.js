@@ -1,3 +1,4 @@
+import { user } from './formHandling.js';
 const sidebar = document.querySelector('.sidebar');
 const menu = document.querySelector('.menu');
 const close = document.querySelector('.close');
@@ -24,9 +25,10 @@ const addTeacher = (teachersArr) => {
 				<th scope="row">${teacher.id}</th>
 				<td>${teacher.name}</td>
 				<td>${teacher.email}</td>
+				<td>${teacher.password}</td>
 				<td>${teacher.phone}</td>
 				<td>${teacher.Alhalka_Number}</td>
-				<td></td>
+				<td>تعديل \ حذف</td>
 			</tr>
         `;
 		html += content;
@@ -41,8 +43,8 @@ const addParent = (parentArr) => {
 				<th scope="row">${parent.id}</th>
 				<td>${parent.name}</td>
 				<td>${parent.phone}</td>
-				<td></td>
-				<td></td>
+				<td>${parent.password}</td>
+				<td>تعديل \ حذف</td>
 			</tr>
         `;
 		html += content;
@@ -53,7 +55,7 @@ const addParent = (parentArr) => {
 fetch('http://localhost/php/Alssafrah/api/admin/allteachers.php')
 	.then((respones) => respones.json())
 	.then((data) => {
-		if (data.data.teachers) {
+		if (user === 'addTeacher') {
 			addTeacher(data.data.teachers);
 		}
 	});
@@ -61,7 +63,7 @@ fetch('http://localhost/php/Alssafrah/api/admin/allteachers.php')
 fetch('http://localhost/php/Alssafrah/api/admin/allparents.php')
 	.then((respones) => respones.json())
 	.then((data) => {
-		if (data.data.parents) {
-			addParent(data.data.parents);
+		if (user === 'addParent') {
+			addParent(data.data);
 		}
 	});
