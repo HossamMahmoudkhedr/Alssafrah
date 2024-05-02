@@ -1,39 +1,27 @@
+import { requestData } from './APIHandle.js';
+
 const form = document.querySelector('form');
-const input = document.querySelector('input');
-const email = document.querySelector('#email');
-const password = document.querySelector('#password');
+const input = document.querySelectorAll('input');
+
+let href = window.location.toString();
+let arr = href.split('/');
+let user = arr[arr.length - 1].split('.')[0];
+// http://localhost/php/Alssafrah/api/
+
 const formData = new FormData();
 
-formData.append('type', 'admin');
+input.forEach((el) => {
+	el.onchange = () => {
+		formData.append(el.name, el.value);
+	};
+});
 
-email.onchange = () => {
-	formData.append(email.name, email.value);
-	console.log(formData);
-};
-password.onchange = () => {
-	formData.append(password.name, password.value);
-	console.log(formData);
-};
+let url;
 
 form.addEventListener('submit', (e) => {
 	e.preventDefault();
-
-	fetch('http://localhost/php/Alssafrah/api/admin/adminlogin.php', {
-		method: 'POST',
-		body: formData,
-	})
-		.then((response) => {
-			if (!response.ok) {
-				throw new Error('Network response was not ok');
-			}
-			return response.json(); // Assuming the response is JSON
-		})
-		.then((data) => {
-			// Handle the response data
-			console.log(data);
-		})
-		.catch((error) => {
-			// Error handling
-			console.error('There was a problem with the fetch operation:', error);
-		});
+	url = 'admin/addteacher.php';
+	if (user === 'addTeacher') {
+		requestData(url, formData, 'POST');
+	}
 });
