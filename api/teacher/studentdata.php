@@ -32,7 +32,9 @@ if($_SERVER['REQUEST_METHOD'] === 'GET')
         $student = mysqli_fetch_assoc($result);
     }
     return SuccessResponse("all student data",$student);
-
-        
-      
+  
+}
+else{
+    $errors[]=['security'=>'unsuppored method'];
+    ValidationResponse("validation errors",$errors);
 }

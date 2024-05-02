@@ -54,8 +54,9 @@ if($_SERVER['REQUEST_METHOD'] === 'GET')
             $data['parents_without_students'][] = $student;
         }
     }
-    return SuccessResponse("all unrelated useres",$data);
-
-        
-      
+    return SuccessResponse("all unrelated useres",$data);  
+}
+else{
+    $errors[]=['security'=>'unsuppored method'];
+    ValidationResponse("validation errors",$errors);
 }

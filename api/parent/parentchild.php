@@ -35,7 +35,8 @@ if($_SERVER['REQUEST_METHOD'] === 'GET')
         }
     }
     return SuccessResponse("all student data",$data);
-
-        
-      
+}
+else{
+    $errors[]=['security'=>'unsuppored method'];
+    ValidationResponse("validation errors",$errors);
 }

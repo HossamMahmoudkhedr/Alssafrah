@@ -102,3 +102,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
         return SuccessResponse("Parent successfully added");
     }
 }
+else{
+    $errors[]=['security'=>'unsuppored method'];
+    ValidationResponse("validation errors",$errors);
+}
