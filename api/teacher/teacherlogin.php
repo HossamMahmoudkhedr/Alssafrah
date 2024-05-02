@@ -45,7 +45,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
         {
             return FailedResponse('Failed to login teacher in correct password or email ');
         }
-        if(!password_verify($password,$teacher['password']))
+        if($password!==$teacher['password'])
         {
             return FailedResponse('Failed to login teacher in correct password or email');
         }

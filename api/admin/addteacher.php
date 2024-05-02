@@ -36,7 +36,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
     }
     $name=$_POST['name'];
     $email=$_POST['email'];
-    $password=password_hash($_POST['password'],PASSWORD_BCRYPT);
+    $password=$_POST['password'];
     $phone=$_POST['phone'];
     $admin_id=$_SESSION['id'];
     $admin_id = (int)$admin_id;

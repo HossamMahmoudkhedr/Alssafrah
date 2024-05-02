@@ -29,8 +29,6 @@ if($_SERVER['REQUEST_METHOD'] === 'GET')
         {
             return FailedResponse("User not found");
         }
-        unset($teacher['password']);
-
     }
 
     return SuccessResponse("teacher",$teacher);      

@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $phone = $_POST['phone'];
     $alhalka_number = $_POST['alhalka_number'];
-    $password = isset($_POST['newpassword']) ? password_hash($_POST['newpassword'], PASSWORD_BCRYPT) : null;
+    $password = isset($_POST['newpassword']) ? $_POST['newpassword'] : null;
 
     $query = "SELECT * FROM teachers WHERE id=?";
     $stm_teachers = mysqli_prepare($con, $query);

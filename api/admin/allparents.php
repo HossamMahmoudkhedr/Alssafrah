@@ -27,7 +27,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET')
         //$parents = mysqli_fetch_assoc($result);
         
         while ($parent = mysqli_fetch_assoc($result)) {
-            unset($parent['password']);
+
             $data[] = $parent;
         }
     }

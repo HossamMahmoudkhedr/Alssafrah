@@ -23,7 +23,6 @@ create table parents
 (
 	id int primary key auto_increment,
 	name varchar(150) not null,
-	email varchar(250) ,
 	phone varchar(50) not null unique,
 	password varchar(500) not null,
 	admin_id int not null ,
@@ -39,7 +38,7 @@ create table students
     new_sura_start_number varchar(5) ,
 	new_sura_end_name varchar(50) ,
 	new_sura_end_number varchar(5) ,
-    revision_sura_star_name varchar(50),
+    revision_sura_start_name varchar(50),
     revision_sura_start_number varchar(5) ,
     revision_sura_end_name varchar(50) ,
     revision_sura_end_number varchar(5),
@@ -56,5 +55,8 @@ select * from admins;
 select * from parents;
 select * from students;
 select * from teachers;
+#ALTER TABLE parents AUTO_INCREMENT = 1;
+
+
 
 

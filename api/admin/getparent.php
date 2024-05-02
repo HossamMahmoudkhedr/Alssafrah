@@ -29,7 +29,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET')
         {
             return FailedResponse("User not found");
         }
-        unset($parent['password']);
+      
        
     }
     return SuccessResponse("parent",$parent);      

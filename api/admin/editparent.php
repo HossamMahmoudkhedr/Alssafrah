@@ -8,21 +8,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = ['name' => 'required'];
     if (!isset($_POST['id']) || empty($_POST['id']))
         $errors[] = ['id' => 'required'];
-    if (!isset($_POST['email']) || empty($_POST['email']))
-        $errors[] = ['email' => 'required'];
-    else {
-        $email = $_POST['email'];
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $errors[] = ['email' => 'Invalid email format'];
-        }
-    }
+   
     if (!isset($_POST['phone']) || empty($_POST['phone']))
         $errors[] = ['phone' => 'required'];
     $password = null;
     if (isset($_POST['newpassword']) && !empty($_POST['newpassword'])) {
-        $password = password_hash($_POST['newpassword'], PASSWORD_BCRYPT);
+        $password = $_POST['newpassword'];
     }
-
     if (!isset($_SESSION['type']) || $_SESSION['type'] !== 'admin') {
         $errors[] = ['security' => 'unauthorized'];
     }
@@ -32,7 +24,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'];
 
     $id = $_POST['id'];
-    $email = $_POST['email'];
     $phone = $_POST['phone'];
 
     $query = "SELECT * FROM parents WHERE id=?";
@@ -43,19 +34,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $result = mysqli_stmt_get_result($stm_parent);
         $parent = mysqli_fetch_assoc($result);
         if ($parent) {
-            if ($parent['email'] !== $email) {
-                $query = "SELECT id, email FROM parents WHERE email = ?";
-                $stm_email = mysqli_prepare($con, $query);
-                if ($stm_email) {
-                    mysqli_stmt_bind_param($stm_email, 's', $email);
-                    mysqli_stmt_execute($stm_email);
-                    $result = mysqli_stmt_get_result($stm_email);
-                    $parent_email = mysqli_fetch_assoc($result);
-                    if ($parent_email !== null && $parent_email['id'] !== $id) {
-                        return FailedResponse('This user email is already in use');
-                    }
-                }
-            }
             if ($parent['phone'] !== $phone) {
                 $query = "SELECT id, phone FROM parents WHERE phone = ?";
                 $stm_phone = mysqli_prepare($con, $query);
@@ -70,16 +48,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             }
             if (isset($password)) {
-                $query = "UPDATE parents SET name = ?, phone = ?, email = ?, password = ? WHERE id = ? ";
+                $query = "UPDATE parents SET name = ?, phone = ?, password = ? WHERE id = ? ";
                 $stm_update = mysqli_prepare($con, $query);
                 if ($stm_update) {
-                    mysqli_stmt_bind_param($stm_update, 'ssssi', $name, $phone, $email, $password, $id);
+                    mysqli_stmt_bind_param($stm_update, 'sssi', $name, $phone,  $password, $id);
                 }
             } else {
-                $query = "UPDATE parents SET name = ?, phone = ?, email = ? WHERE id = ? ";
+                $query = "UPDATE parents SET name = ?, phone = ?,  WHERE id = ? ";
                 $stm_update = mysqli_prepare($con, $query);
                 if ($stm_update) {
-                    mysqli_stmt_bind_param($stm_update, 'sssi', $name, $phone, $email, $id);
+                    mysqli_stmt_bind_param($stm_update, 'ssi', $name, $phone, $id);
                 }
             }
             mysqli_stmt_execute($stm_update);

@@ -10,15 +10,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
    $errors=[];
    if(!isset($_POST['name'])|| empty($_POST['name']))
         $errors[]=['name'=>'الاسم مطلوب'];
-   if(!isset($_POST['email'])|| empty($_POST['email']))
-        $errors[]=['email'=>'البريد الالكتروني مطلوب'];
-    else 
-    {
-        $email=$_POST['email'];
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $errors[] = ['email' => ' برجاء ادخال بريد الكتروني صحيح'];
-        }
-    }
     if(!isset($_POST['phone'])|| empty($_POST['phone']))
         $errors[]=['phone'=>'رقم الجوال مطلوب'];
     if(!isset($_POST['password'])|| empty($_POST['password']))
@@ -32,25 +23,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
         return ValidationResponse("validation errors",$errors);
     }
     $name=$_POST['name'];
-    $email=$_POST['email'];
-    $password=password_hash($_POST['password'],PASSWORD_BCRYPT);
+    $password=$_POST['password'];
     $phone=$_POST['phone'];
     $admin_id=$_SESSION['id'];
     $admin_id = (int)$admin_id;
-    // get the parent email
-    $query="SELECT email FROM parents WHERE email = ?";
-    $stm_email= mysqli_prepare($con,$query);
-    if($stm_email)
-    {
-        mysqli_stmt_bind_param($stm_email,'s',$email);
-        mysqli_stmt_execute($stm_email);
-        $result = mysqli_stmt_get_result($stm_email);
-        $parent = mysqli_fetch_assoc($result);
-        if($parent)
-        {
-            return FailedResponse('هذا البريد الالكتروني مستخدم بلفعل');
-        }
-    }
     $query="SELECT phone FROM parents WHERE phone = ?";
     $stm_phone= mysqli_prepare($con,$query);
     if($stm_phone)
@@ -64,10 +40,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
             return FailedResponse('هذا الجوال مستخدم بلفعل');
         }
     }
-    $query = "INSERT INTO parents (name,email,password,phone, admin_id ) VALUES(?,?,?,?,?)";
+    $query = "INSERT INTO parents (name,password,phone, admin_id ) VALUES(?,?,?,?)";
     $stm = mysqli_prepare($con, $query);
     if ($stm) {
-        mysqli_stmt_bind_param($stm, 'sssss', $name, $email, $password, $phone, $admin_id);
+        mysqli_stmt_bind_param($stm, 'ssss', $name, $password, $phone, $admin_id);
         $result = mysqli_stmt_execute($stm);
         if (!$result) {
             return FailedResponse('هنالك خطاء حاول من جديد');
