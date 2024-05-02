@@ -65,7 +65,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
         mysqli_stmt_bind_param($stm, 'sssii', $name, $ssn, $parent_phone, $admin_id,$teacher_id);
         $result = mysqli_stmt_execute($stm);
         if (!$result) {
-            return FailedResponse('Failed to add this student, please try again');
+            return FailedResponse('فشل اضافه الطالب ');
         }
         $query_parent = "SELECT id , phone FROM parents WHERE phone = ?";
         $stm_parent = mysqli_prepare($con, $query_parent);
@@ -89,10 +89,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
             }
             }
         }
-        return SuccessResponse("student successfully added");
+        return SuccessResponse("تمتت اضافه الطالب بنجاح");
     }
 }
 else{
-    $errors[]=['security'=>'unsuppored method'];
+    $errors[]=['security'=>'طريقه غير صحيحه'];
     ValidationResponse("validation errors",$errors);
 }

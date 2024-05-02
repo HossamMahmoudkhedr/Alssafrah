@@ -11,21 +11,21 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
    //validation rules
    $errors=[];
    if(!isset($_POST['email'])|| empty($_POST['email']))
-        $errors[]=['email'=>'required'];
+        $errors[]=['email'=>"البريد الالكتروني مطلوب"];
     else 
     {
         $email=$_POST['email'];
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $errors[] = ['email' => 'Invalid email format'];
+            $errors[] = ['email' => 'البريد الاكتروني غير صحيح'];
         }
     }
     if(!isset($_POST['password'])|| empty($_POST['password']))
-        $errors[]=['password'=>'required'];
+        $errors[]=['password'=>'كلمه المرور مطلوبه'];
     if(!isset($_POST['type'])|| empty($_POST['type']))
         $errors[]=['type'=>'type must be provided'];
     else if($_POST['type']!='admin'&&$_POST['type']!='Admin')
     {
-        $errors[]=['security'=>'unauthorized'];
+        $errors[]=['security'=>'غير مسموح بل دخول هنا'];
     }
     if(!empty($errors))
     {
@@ -43,20 +43,20 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
         $admin = mysqli_fetch_assoc($result);
         if(!$admin)
         {
-            return FailedResponse('Failed to login admin in correct password or email ');
+            return FailedResponse('فشل تسجيل الدخول برجاء التأكد من البريد الالكتروني وكلمه السر ');
         }
         if(!password_verify($password,$admin['password']))
         {
-            return FailedResponse('Failed to login admin in correct password or email');
+            return FailedResponse('فشل تسجيل الدخول برجاء التأكد من البريد الالكتروني وكلمه السر ');
         }
         $_SESSION['id'] =$admin['id'];//log the admin and save the valus of important things
         $_SESSION['type']='admin';
         unset($admin['password']);//remove the password from the api response  
         $admin['type']='admin';
-       return SuccessResponse("Done",$admin);
+       return SuccessResponse("تم",$admin);
     }
 }
 else{
-    $errors[]=['security'=>'unsuppored method'];
+    $errors[]=['security'=>'طريقه غير صحيحه'];
     ValidationResponse("validation errors",$errors);
 }

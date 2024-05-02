@@ -34,6 +34,6 @@ if($_SERVER['REQUEST_METHOD'] === 'GET')
     return SuccessResponse("all parents",$data);     
 }
 else{
-    $errors[]=['security'=>'unsuppored method'];
+    $errors[]=['security'=>'طريقه غير صحيحه'];
     ValidationResponse("validation errors",$errors);
 }

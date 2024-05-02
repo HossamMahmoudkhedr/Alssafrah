@@ -9,7 +9,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET')
         $errors[] = ['id' => 'required'];
    if(!isset($_SESSION['type'])||$_SESSION['type']!='admin')
     {
-        $errors[]=['security'=>'unauthorized'];
+        $errors[]=['security'=>'غير مسموح بل دخول هنا'];
     }
     if(!empty($errors))
     {
@@ -27,14 +27,14 @@ if($_SERVER['REQUEST_METHOD'] === 'GET')
         $admin=mysqli_fetch_assoc($result);
         if(!$admin)
         {
-            return FailedResponse("User not found");
+            return FailedResponse("المستخدم غير موجود");
         }
         unset($admin['password']);
 
     }
-    return SuccessResponse("teacher",$admin);      
+    return SuccessResponse("الادمن",$admin);      
 }
 else{
-    $errors[]=['security'=>'unsuppored method'];
+    $errors[]=['security'=>'طريقه غير صحيحه'];
     ValidationResponse("validation errors",$errors);
 }

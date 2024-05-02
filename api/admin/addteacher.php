@@ -9,26 +9,26 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
    //validation rules
    $errors=[];
    if(!isset($_POST['name'])|| empty($_POST['name']))
-        $errors[]=['name'=>'required'];
+        $errors[]=['name'=>'الاسم مطلوب'];
    if(!isset($_POST['email'])|| empty($_POST['email']))
-        $errors[]=['email'=>'required'];
+        $errors[]=['email'=>'البريد الالكتروني مطلوب'];
     else 
     {
         $email=$_POST['email'];
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $errors[] = ['email' => 'Invalid email format'];
+            $errors[] = ['email' => 'البريد الاكتروني غير صحيح'];
         }
     }
     if(!isset($_POST['phone'])|| empty($_POST['phone']))
-        $errors[]=['phone'=>'required'];
+        $errors[]=['phone'=>'رقم الجوال مطلوب'];
     if(!isset($_POST['password'])|| empty($_POST['password']))
-        $errors[]=['password'=>'required'];
+        $errors[]=['password'=>'كلمه المرور مطلوبه'];
     if(!isset($_POST['alhalka_number'])|| empty($_POST['alhalka_number']))
-    $errors[]=['alhalka_number'=>'required'];
+    $errors[]=['alhalka_number'=>'رقم الحلقه مطلوب'];
     
     if(!isset($_SESSION['type'])||$_SESSION['type']!='admin')
     {
-        $errors[]=['security'=>'unauthorized'];
+        $errors[]=['security'=>'غير مسموح بل دخول هنا'];
     }
     if(!empty($errors))
     {
@@ -52,7 +52,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
         $teacher = mysqli_fetch_assoc($result);
         if($teacher)
         {
-            return FailedResponse('this user email is exist');
+            return FailedResponse('البريد الالكتروني موجود');
         }
     }
     $query="SELECT phone FROM teachers WHERE phone = ?";
@@ -65,7 +65,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
         $teacher = mysqli_fetch_assoc($result);
         if($teacher)
         {
-            return FailedResponse('this user phone number is exist');
+            return FailedResponse('رقم الجوال موجود');
         }
     }
     $query="SELECT Alhalka_Number FROM teachers WHERE Alhalka_Number = ?";
@@ -78,7 +78,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
         $teacher = mysqli_fetch_assoc($result);
         if($teacher)
         {
-            return FailedResponse('Alhalka Number number is exist');
+            return FailedResponse('رقم الحلقه موجود');
         }
     }
     $query="INSERT INTO teachers (name,email,password,phone,Alhalka_Number, admin_id ) VALUES(?,?,?,?,?,?)";
@@ -91,12 +91,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
         //$teacher = mysqli_fetch_assoc($result);
         if(!$result)
         {
-            return FailedResponse('Failed to add this teacher try agian');
+            return FailedResponse('فشل اضافه المعلم');
         }
-       return SuccessResponse("Done Teacher sucessfuly added");
+       return SuccessResponse("تمت اضافه المعلم");
     }
 }
 else{
-    $errors[]=['security'=>'unsuppored method'];
+    $errors[]=['security'=>'طريقه غير صحيحه'];
     ValidationResponse("validation errors",$errors);
 }
