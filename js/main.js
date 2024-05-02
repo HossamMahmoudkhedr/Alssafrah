@@ -61,7 +61,7 @@ const addStudent = (studentArr) => {
 				<td>${student.name}</td>
 				<td>${student.ssn}</td>
 				<td>${student.parent_phone}</td>
-				<td>${student.Alhalaka_Number}</td>
+				<td>${student.Alhalka_Number}</td>
 				<td>تعديل \ حذف</td>
 			</tr>
         `;
@@ -85,26 +85,26 @@ window.onload = () => {
 			});
 	}
 
-	fetch('http://localhost/php/Alssafrah/api/admin/allteachers.php')
-		.then((respones) => respones.json())
-		.then((data) => {
-			if (user === 'addTeacher') {
+	if (user === 'addTeacher') {
+		fetch('http://localhost/php/Alssafrah/api/admin/allteachers.php')
+			.then((respones) => respones.json())
+			.then((data) => {
 				addTeacher(data.data);
-			}
-		});
+			});
+	}
 
-	fetch('http://localhost/php/Alssafrah/api/admin/allparents.php')
-		.then((respones) => respones.json())
-		.then((data) => {
-			if (user === 'addParent') {
+	if (user === 'addParent') {
+		fetch('http://localhost/php/Alssafrah/api/admin/allparents.php')
+			.then((respones) => respones.json())
+			.then((data) => {
 				addParent(data.data);
-			}
-		});
-	fetch('http://localhost/php/Alssafrah/api/admin/allstudents.php')
-		.then((respones) => respones.json())
-		.then((data) => {
-			if (user === 'addStudent') {
+			});
+	}
+	if (user === 'addStudent') {
+		fetch('http://localhost/php/Alssafrah/api/admin/allstudents.php')
+			.then((respones) => respones.json())
+			.then((data) => {
 				addStudent(data.data);
-			}
-		});
+			});
+	}
 };

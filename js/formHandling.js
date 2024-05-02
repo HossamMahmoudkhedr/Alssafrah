@@ -64,7 +64,7 @@ const addStudent = (studentArr) => {
 				<td>${student.name}</td>
 				<td>${student.ssn}</td>
 				<td>${student.parent_phone}</td>
-				<td>${student.Alhalaka_Number}</td>
+				<td>${student.Alhalka_Number}</td>
 				<td>تعديل \ حذف</td>
 			</tr>
         `;
