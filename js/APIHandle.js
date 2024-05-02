@@ -1,7 +1,7 @@
 export const requestData = (url, formData, method) => {
 	fetch(`http://localhost/php/Alssafrah/api/${url}`, {
 		method: method,
-		body: formData,
+		body: formData ? formData : {},
 	})
 		.then((response) => {
 			return response.json();
