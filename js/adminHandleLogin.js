@@ -27,7 +27,7 @@ form.addEventListener('submit', (e) => {
 			return response.json();
 		})
 		.then((data) => {
-			res = data;
+			console.log(data);
 			window.location.href =
 				'http://localhost/php/Alssafrah/pages/addTeacher.html';
 		})
