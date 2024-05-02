@@ -45,7 +45,7 @@ const addParent = (parentArr) => {
 				<th scope="row">${parent.id}</th>
 				<td>${parent.name}</td>
 				<td>${parent.phone}</td>
-				<td>${teacher.password}</td>
+				<td>${parent.password}</td>
 				<td>تعديل \ حذف</td>
 			</tr>
         `;
@@ -62,7 +62,7 @@ form.addEventListener('submit', (e) => {
 		fetch('http://localhost/php/Alssafrah/api/admin/allteachers.php')
 			.then((respones) => respones.json())
 			.then((data) => {
-				addTeacher(data.data.teachers);
+				addTeacher(data.data);
 			});
 	} else if (user === 'addParent') {
 		url = 'admin/addparent.php';
@@ -70,7 +70,7 @@ form.addEventListener('submit', (e) => {
 		fetch('http://localhost/php/Alssafrah/api/admin/allparents.php')
 			.then((respones) => respones.json())
 			.then((data) => {
-				addParent(data.data.parents);
+				addParent(data.data);
 			});
 	}
 });

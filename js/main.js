@@ -56,7 +56,7 @@ fetch('http://localhost/php/Alssafrah/api/admin/allteachers.php')
 	.then((respones) => respones.json())
 	.then((data) => {
 		if (user === 'addTeacher') {
-			addTeacher(data.data.teachers);
+			addTeacher(data.data);
 		}
 	});
 
