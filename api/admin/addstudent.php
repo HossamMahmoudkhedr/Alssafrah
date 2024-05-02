@@ -10,16 +10,16 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
    //alhalka_number
    $errors=[];
    if(!isset($_POST['name'])|| empty($_POST['name']))
-        $errors[]=['name'=>'required'];
+        $errors[]=['name'=>'الاسم مطلوب'];
     if(!isset($_POST['ssn'])|| empty($_POST['ssn']))
-    $errors[]=['ssn'=>'required'];
+    $errors[]=['ssn'=>'رقم الهويه مطلوب'];
     if(!isset($_POST['parent_phone'])|| empty($_POST['parent_phone']))
-        $errors[]=['parent_phone'=>'required'];
+        $errors[]=['parent_phone'=>'رقم ولي المر مطلوب'];
     if(!isset($_POST['alhalka_number'])|| empty($_POST['alhalka_number']))
-    $errors[]=['alhalka_number'=>'required'];
+    $errors[]=['alhalka_number'=>'رقم الحلقه مطلوب'];
    if(!isset($_SESSION['type'])||$_SESSION['type']!='admin')
     {
-        $errors[]=['security'=>'unauthorized'];
+        $errors[]=['security'=>'غير مسموح بل دخول هنا'];
     }
     if(!empty($errors))
     {
@@ -42,7 +42,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
         $student = mysqli_fetch_assoc($result);
         if($student)
         {
-            return FailedResponse('this user ssn is exist');
+            return FailedResponse('رقم الهويه موجود بلفعل');
         }
     }
     $query="SELECT id , Alhalka_Number FROM teachers WHERE Alhalka_Number = ?";
@@ -55,7 +55,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
         $teacher = mysqli_fetch_assoc($result);
         if(!$teacher)
         {
-            return FailedResponse('no teacher and no alhalka number exist');
+            return FailedResponse('لا يوجد حلقه بهذا الرقم');
         }
         $teacher_id=$teacher['id'];
     }

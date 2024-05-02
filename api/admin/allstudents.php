@@ -15,7 +15,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET')
     }
     $admin_id=$_SESSION['id'];
     $admin_id = (int)$admin_id;
-    $query="SELECT students.name AS name ,teachers.name AS teacher_name,  teachers.Alhalka_Number FROM students JOIN teachers ON students.teacher_id = teachers.id; ";
+    $query="SELECT students.id as id, students.name AS name ,students.parent_phone,ssn,teachers.name AS teacher_name,  teachers.Alhalka_Number FROM students JOIN teachers ON students.teacher_id = teachers.id; ";
     
     $stm_students= mysqli_prepare($con,$query);
     $data=[];
