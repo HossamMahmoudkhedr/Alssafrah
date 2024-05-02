@@ -32,6 +32,14 @@ body a {
 	width: 50%;
 }
 
+.top_shape {
+	top: -20px;
+}
+
+.bottom_shape {
+	bottom: -20px;
+}
+
 h2 {
 	color: var(--light-green) !important;
 }
