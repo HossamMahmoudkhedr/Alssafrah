@@ -1,6 +1,7 @@
 const sidebar = document.querySelector('.sidebar');
 const menu = document.querySelector('.menu');
 const close = document.querySelector('.close');
+const tableBody = document.querySelector('.table_body');
 
 const openSidebar = () => {
 	sidebar.classList.add('show');
@@ -14,3 +15,53 @@ const closeSidebar = () => {
 
 menu.addEventListener('click', openSidebar);
 close.addEventListener('click', closeSidebar);
+
+const addTeacher = (teachersArr) => {
+	let html = ``;
+	teachersArr.map((teacher) => {
+		let content = `
+            <tr>
+				<th scope="row">${teacher.id}</th>
+				<td>${teacher.name}</td>
+				<td>${teacher.email}</td>
+				<td>${teacher.phone}</td>
+				<td>${teacher.Alhalka_Number}</td>
+				<td></td>
+			</tr>
+        `;
+		html += content;
+	});
+	tableBody.innerHTML = html;
+};
+const addParent = (parentArr) => {
+	let html = ``;
+	parentArr.map((parent) => {
+		let content = `
+            <tr>
+				<th scope="row">${parent.id}</th>
+				<td>${parent.name}</td>
+				<td>${parent.phone}</td>
+				<td></td>
+				<td></td>
+			</tr>
+        `;
+		html += content;
+	});
+	tableBody.innerHTML = html;
+};
+
+fetch('http://localhost/php/Alssafrah/api/admin/allteachers.php')
+	.then((respones) => respones.json())
+	.then((data) => {
+		if (data.data.teachers) {
+			addTeacher(data.data.teachers);
+		}
+	});
+
+fetch('http://localhost/php/Alssafrah/api/admin/allparents.php')
+	.then((respones) => respones.json())
+	.then((data) => {
+		if (data.data.parents) {
+			addParent(data.data.parents);
+		}
+	});
