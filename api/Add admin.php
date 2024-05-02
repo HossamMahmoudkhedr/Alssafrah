@@ -1,5 +1,5 @@
 <?php
-/*
+
 include "includes/connection.php";
 $name="Admin";
 $password="Admin";
@@ -36,4 +36,4 @@ mysqli_close($con);
 // Output JSON response
 header('Content-Type: application/json');
 echo json_encode($response);
-?>*/
+?>
