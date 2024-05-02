@@ -9,23 +9,23 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
    //validation rules
    $errors=[];
    if(!isset($_POST['name'])|| empty($_POST['name']))
-        $errors[]=['name'=>'required'];
+        $errors[]=['name'=>'الاسم مطلوب'];
    if(!isset($_POST['email'])|| empty($_POST['email']))
-        $errors[]=['email'=>'required'];
+        $errors[]=['email'=>'البريد الالكتروني مطلوب'];
     else 
     {
         $email=$_POST['email'];
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $errors[] = ['email' => 'Invalid email format'];
+            $errors[] = ['email' => ' برجاء ادخال بريد الكتروني صحيح'];
         }
     }
     if(!isset($_POST['phone'])|| empty($_POST['phone']))
-        $errors[]=['phone'=>'required'];
+        $errors[]=['phone'=>'رقم الجوال مطلوب'];
     if(!isset($_POST['password'])|| empty($_POST['password']))
-        $errors[]=['password'=>'required'];
+        $errors[]=['password'=>'كلمه المرور مطلوبه'];
    if(!isset($_SESSION['type'])||$_SESSION['type']!='admin')
     {
-        $errors[]=['security'=>'unauthorized'];
+        $errors[]=['security'=>'غير مسموح بل دخول هنا'];
     }
     if(!empty($errors))
     {
@@ -48,7 +48,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
         $parent = mysqli_fetch_assoc($result);
         if($parent)
         {
-            return FailedResponse('this user email is exist');
+            return FailedResponse('هذا البريد الالكتروني مستخدم بلفعل');
         }
     }
     $query="SELECT phone FROM parents WHERE phone = ?";
@@ -61,7 +61,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
         $parent = mysqli_fetch_assoc($result);
         if($parent)
         {
-            return FailedResponse('this user phone number is exist');
+            return FailedResponse('هذا الجوال مستخدم بلفعل');
         }
     }
     $query = "INSERT INTO parents (name,email,password,phone, admin_id ) VALUES(?,?,?,?,?)";
@@ -70,7 +70,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
         mysqli_stmt_bind_param($stm, 'sssss', $name, $email, $password, $phone, $admin_id);
         $result = mysqli_stmt_execute($stm);
         if (!$result) {
-            return FailedResponse('Failed to add this parent, please try again');
+            return FailedResponse('هنالك خطاء حاول من جديد');
         }
         // Retrieve the inserted parent_id
         $parent_id = mysqli_insert_id($con);
@@ -99,10 +99,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
                 }
             } 
         }
-        return SuccessResponse("Parent successfully added");
+        return SuccessResponse("تمت اضافه ولي الامر بنجاح");
     }
 }
 else{
-    $errors[]=['security'=>'unsuppored method'];
+    $errors[]=['security'=>'طريقه غير صحيحه'];
     ValidationResponse("validation errors",$errors);
 }
