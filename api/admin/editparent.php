@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     mysqli_stmt_bind_param($stm_update, 'sssi', $name, $phone,  $password, $id);
                 }
             } else {
-                $query = "UPDATE parents SET name = ?, phone = ?,  WHERE id = ? ";
+                $query = "UPDATE parents SET name = ?, phone = ?  WHERE id = ? ";
                 $stm_update = mysqli_prepare($con, $query);
                 if ($stm_update) {
                     mysqli_stmt_bind_param($stm_update, 'ssi', $name, $phone, $id);

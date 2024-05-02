@@ -28,7 +28,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET')
         mysqli_stmt_execute($stm_teachers);
         $result = mysqli_stmt_get_result($stm_teachers);
         while ($student = mysqli_fetch_assoc($result)) {
-            $data['teachers'][] = $student;
+            $data[] = $student;
         }
     }
     return SuccessResponse("all teachers",$data);      
