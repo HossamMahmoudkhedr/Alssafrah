@@ -28,54 +28,12 @@ body a {
 	position: relative;
 	z-index: 1;
 }
-.login_form h2 {
-	color: var(--light-green);
+.admin_login {
+	width: 50%;
 }
 
-form {
-	width: 70%;
-	display: flex;
-	gap: 0.5rem;
-	flex-direction: column;
-}
-form > div {
-	display: flex;
-	flex-direction: column;
-	gap: 1rem;
-	margin-bottom: 2rem;
-}
-form > div div {
-	display: flex;
-	flex-direction: column;
-	gap: 0.5rem;
-}
-
-form > div div label {
-	color: var(--very-dark-gray);
-}
-
-form > div div input {
-	outline: none;
-	border: 1px solid var(--gray);
-	border-radius: 0.5rem;
-	padding: 0.7rem;
-}
-
-form button {
-	width: 100%;
-	background-color: var(--light-green);
-	color: white;
-	font-weight: bold;
-	padding: 1rem 2rem;
-	border-radius: 0.5rem;
-	font-size: 1.25rem;
-	outline: none;
-	border: none;
-}
-
-form a {
-	color: var(--light-green);
-	text-align: center;
+h2 {
+	color: var(--light-green) !important;
 }
 
 .back {
@@ -95,12 +53,77 @@ form a {
 	border-bottom: 37px solid transparent;
 	border-left: 37px solid var(--dark-green);
 }
+.sidebar {
+	width: 20%;
+	height: 100vh;
+	background-color: var(--light-green);
+	float: left;
+	position: fixed;
+	left: 0;
+	top: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	transition: all 0.3s linear;
+}
+
+.content {
+	width: 80%;
+	height: 100vh;
+	float: right;
+}
+
+.content {
+	height: 100vh;
+}
+
+.sidebar_items {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	text-align: center;
+}
+
+.sidebar_items a {
+	background-color: rgba(0, 0, 0, 0.05);
+	padding: 1.5rem 0;
+}
+.sidebar_items a.chosen {
+	background-color: rgba(0, 0, 0, 0.15);
+}
+
+.title {
+	background-color: var(--light-gray);
+}
+.padding-radius {
+	padding: 1rem;
+	border-radius: 0.5rem;
+}
+.flex-alignments {
+	display: flex;
+	gap: 1rem;
+	justify-content: center;
+	width: 25%;
+}
+
+.menu {
+	display: none;
+}
+.sidebar .close {
+	display: none;
+}
 
 /* End General */
 
 /* Start Index Page */
 .f_shape {
 	height: 100vh;
+	display: flex;
+}
+
+.left-side-buttons {
+	position: relative;
+	width: 50%;
 }
 
 .f_shape span {
@@ -134,22 +157,98 @@ form a {
 /* End teacher login page */
 
 /* Start Achievements page */
-.sidebar {
-	width: 20%;
-	height: 100vh;
+
+.right-side {
 	background-color: var(--light-green);
+	display: flex;
+	height: 100%;
 }
-.content {
-	width: 80%;
+.box {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+	background-color: #d9d9d925;
+	border: 1px solid #ffffff7c;
+	border-radius: 0.5rem;
+	padding: 1rem 1rem 0.5rem 1rem;
+	width: 120px;
 }
-.sidebar_items a {
-	background-color: rgba(0, 0, 0, 0.05);
-	padding: 1.5rem 0;
+.left-side {
+	height: 100%;
+	background-color: #84a96625;
+	padding: 2.25rem 3rem;
+	/* border-radius: 1rem; */
 }
-.sidebar_items a.chosen {
-	background-color: rgba(0, 0, 0, 0.15);
+
+.content > div > div {
+	/* height: 410px; */
 }
+
 /* End Achievements page */
+
+/* Start Student Board Page */
+.student_bar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: var(--dark-gray);
+	text-align: center;
+}
+.student_bar.children_list {
+	justify-content: flex-start;
+}
+
+.student_bar div,
+.student_bar a,
+.student_bar p {
+	padding-top: 0.8rem;
+	padding-bottom: 0.8rem;
+}
+.student_bar div,
+.student_bar a {
+	background-color: var(--light-gray);
+}
+.student_bar a {
+	width: 40%;
+}
+.student_bar a.child_record {
+	width: 50%;
+}
+.student_bar p.child_name {
+	width: 30%;
+}
+.student_bar div {
+	width: 20%;
+	margin-left: 0.5rem;
+}
+.student_bar label,
+.student_bar input {
+	width: 50%;
+}
+/* End Student Board Page */
+
+/* Start evaluation form */
+.save {
+	background-color: var(--light-green);
+	color: white;
+	font-weight: bold;
+	padding: 0.5rem 2rem;
+	border-radius: 0.5rem;
+	outline: none;
+	border: none;
+	align-self: flex-start;
+}
+/* End evaluation form */
+
+/* Start Student results form */
+input:disabled {
+	background-color: white;
+	border-color: black;
+	border-width: 1px;
+	color: black;
+}
+/* End Student results form */
 
 /* Start Media Query */
 @media (min-width: 1550px) {
@@ -163,6 +262,13 @@ form a {
 	/* Start Media Query for Index Page */
 	.f_shape {
 		display: none;
+	}
+	.left-side-buttons {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		width: 100%;
 	}
 	.registration {
 		position: absolute;
@@ -189,9 +295,88 @@ form a {
 	.back {
 		margin-top: 3rem;
 	}
+
 	/* End Media Query for Teacher Login Page */
 }
 
+@media (max-width: 992px) {
+	.right-side {
+		width: 75%;
+	}
+	.left-side {
+		width: 75%;
+		padding: 1.5rem 2rem;
+	}
+	.left-side img {
+		width: 100%;
+	}
+	.right-side > div {
+		width: 100%;
+	}
+	.admin_login {
+		width: 60%;
+	}
+	.menu {
+		display: block;
+		position: absolute;
+		left: 20px;
+		top: 20px;
+		cursor: pointer;
+	}
+	.sidebar .close {
+		position: absolute;
+		left: 20px;
+		top: 20px;
+		z-index: 2;
+		cursor: pointer;
+	}
+	.sidebar.show .close {
+		display: block;
+	}
+	.sidebar {
+		position: absolute;
+		left: 0;
+		top: 0;
+		z-index: 1;
+		width: 0%;
+	}
+	.sidebar div,
+	.sidebar p,
+	.sidebar a {
+		display: none;
+		width: 0;
+		height: 0;
+	}
+	.sidebar.show {
+		position: absolute;
+		left: 0;
+		top: 0;
+		z-index: 1;
+		width: 70%;
+	}
+	.sidebar.show div,
+	.sidebar.show p,
+	.sidebar.show a {
+		display: block;
+		width: initial;
+		height: initial;
+	}
+	.content {
+		float: unset;
+		width: unset;
+	}
+	.student_bar div {
+		width: unset;
+		margin-left: unset;
+	}
+	.student_bar a {
+		width: unset;
+	}
+}
+
 @media (max-width: 768px) {
+	.admin_login {
+		width: 80%;
+	}
 }
 /* End Media Query */
