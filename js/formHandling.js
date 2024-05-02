@@ -3,6 +3,7 @@ import { requestData } from './APIHandle.js';
 const form = document.querySelector('form');
 const input = document.querySelectorAll('input');
 const tableBody = document.querySelector('.table_body');
+const selectHalaka = document.querySelector('.select_halaka');
 
 let href = window.location.toString();
 let arr = href.split('/');
@@ -54,6 +55,24 @@ const addParent = (parentArr) => {
 	tableBody.innerHTML = html;
 };
 
+const addStudent = (studentArr) => {
+	let html = ``;
+	studentArr.map((student) => {
+		let content = `
+            <tr>
+				<th scope="row">${student.id}</th>
+				<td>${student.name}</td>
+				<td>${student.ssn}</td>
+				<td>${student.parent_phone}</td>
+				<td>${student.Alhalaka_Number}</td>
+				<td>تعديل \ حذف</td>
+			</tr>
+        `;
+		html += content;
+	});
+	tableBody.innerHTML = html;
+};
+
 form.addEventListener('submit', (e) => {
 	e.preventDefault();
 	if (user === 'addTeacher') {
@@ -71,6 +90,15 @@ form.addEventListener('submit', (e) => {
 			.then((respones) => respones.json())
 			.then((data) => {
 				addParent(data.data);
+			});
+	} else if (user === 'addStudent') {
+		formData.append(selectHalaka.name, selectHalaka.value);
+		url = 'admin/addstudent.php';
+		requestData(url, formData, 'POST');
+		fetch('http://localhost/php/Alssafrah/api/admin/allstudents.php')
+			.then((respones) => respones.json())
+			.then((data) => {
+				addStudent(data.data);
 			});
 	}
 });

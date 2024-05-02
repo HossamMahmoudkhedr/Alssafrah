@@ -83,16 +83,16 @@
 						<div>
 							<label for="#email">رقم الهوية</label>
 							<input
-								type="email"
-								name="email"
-								id="email" />
+								type="text"
+								name="ssn"
+								id="ssn" />
 						</div>
 
 						<div>
 							<label for="#phone">رقم جوال ولي الأمر</label>
 							<input
 								type="text"
-								name="phone"
+								name="parent_phone"
 								id="phone" />
 						</div>
 						<div>
@@ -102,10 +102,11 @@
 								name="halaka"
 								id="halaka" /> -->
 							<select
-								name="halaka"
+								class="select_halaka"
+								name="alhalka_number"
 								id="halaka">
-								<option value="1">1</option>
-								<option value="2">2</option>
+								<!-- <option value="1">1</option>
+								<option value="2">2</option> -->
 							</select>
 						</div>
 						<div class="d-flex justify-content-end">
@@ -127,9 +128,8 @@
 									م
 								</th>
 								<th scope="col">الاسم</th>
-								<th scope="col">البريد الالكتروني</th>
-								<th scope="col">كلمة المرور</th>
-								<th scope="col">رقم الجوال</th>
+								<th scope="col">رقم الهوية</th>
+								<th scope="col">رقم جوال ولي الامر</th>
 								<th scope="col">رقم الحلقة</th>
 								<th
 									scope="col"
@@ -138,7 +138,7 @@
 								</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody class="table_body">
 							<!-- <tr>
 							<th scope="row">1</th>
 							<td>Mark</td>

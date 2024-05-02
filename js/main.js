@@ -3,6 +3,7 @@ const sidebar = document.querySelector('.sidebar');
 const menu = document.querySelector('.menu');
 const close = document.querySelector('.close');
 const tableBody = document.querySelector('.table_body');
+const selectHalaka = document.querySelector('.select_halaka');
 
 const openSidebar = () => {
 	sidebar.classList.add('show');
@@ -51,19 +52,59 @@ const addParent = (parentArr) => {
 	});
 	tableBody.innerHTML = html;
 };
-
-fetch('http://localhost/php/Alssafrah/api/admin/allteachers.php')
-	.then((respones) => respones.json())
-	.then((data) => {
-		if (user === 'addTeacher') {
-			addTeacher(data.data);
-		}
+const addStudent = (studentArr) => {
+	let html = ``;
+	studentArr.map((student) => {
+		let content = `
+            <tr>
+				<th scope="row">${student.id}</th>
+				<td>${student.name}</td>
+				<td>${student.ssn}</td>
+				<td>${student.parent_phone}</td>
+				<td>${student.Alhalaka_Number}</td>
+				<td>تعديل \ حذف</td>
+			</tr>
+        `;
+		html += content;
 	});
+	tableBody.innerHTML = html;
+};
 
-fetch('http://localhost/php/Alssafrah/api/admin/allparents.php')
-	.then((respones) => respones.json())
-	.then((data) => {
-		if (user === 'addParent') {
-			addParent(data.data);
-		}
-	});
+window.onload = () => {
+	if (selectHalaka) {
+		fetch('http://localhost/php/Alssafrah/api/admin/allteachers.php')
+			.then((respones) => respones.json())
+			.then((data) => {
+				let html = ``;
+				data.data.map((el) => {
+					html += `
+					<option value=${el.Alhalka_Number}>${el.Alhalka_Number}</option>
+				`;
+				});
+				selectHalaka.innerHTML = html;
+			});
+	}
+
+	fetch('http://localhost/php/Alssafrah/api/admin/allteachers.php')
+		.then((respones) => respones.json())
+		.then((data) => {
+			if (user === 'addTeacher') {
+				addTeacher(data.data);
+			}
+		});
+
+	fetch('http://localhost/php/Alssafrah/api/admin/allparents.php')
+		.then((respones) => respones.json())
+		.then((data) => {
+			if (user === 'addParent') {
+				addParent(data.data);
+			}
+		});
+	fetch('http://localhost/php/Alssafrah/api/admin/allstudents.php')
+		.then((respones) => respones.json())
+		.then((data) => {
+			if (user === 'addStudent') {
+				addStudent(data.data);
+			}
+		});
+};
