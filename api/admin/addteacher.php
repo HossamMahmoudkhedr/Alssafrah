@@ -26,7 +26,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
     if(!isset($_POST['alhalka_number'])|| empty($_POST['alhalka_number']))
     $errors[]=['alhalka_number'=>'required'];
     
-   if($_SESSION['type']!='admin')
+    if(!isset($_SESSION['type'])||$_SESSION['type']!='admin')
     {
         $errors[]=['security'=>'unauthorized'];
     }
