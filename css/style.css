@@ -121,6 +121,10 @@ h2 {
 	display: none;
 }
 
+.cursor-pointer {
+	cursor: pointer;
+}
+
 /* End General */
 
 /* Start Index Page */
@@ -368,6 +372,9 @@ input:disabled {
 		display: block;
 		width: initial;
 		height: initial;
+	}
+	.sidebar_items a {
+		margin-bottom: 1rem;
 	}
 	.content {
 		float: unset;
