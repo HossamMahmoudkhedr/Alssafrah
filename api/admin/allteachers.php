@@ -4,10 +4,7 @@ include "../includes/apiResponse.php";
 session_start();
 if($_SERVER['REQUEST_METHOD'] === 'GET')
 {
-   //$email=$_POST['email'];
-   
-   //validation rules
-   //alhalka_number
+    //user validation 
    $errors=[];
    if(!isset($_SESSION['type'])||$_SESSION['type']!='admin')
     {

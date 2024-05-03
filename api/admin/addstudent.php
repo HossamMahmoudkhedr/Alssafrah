@@ -3,11 +3,8 @@ include "../includes/connection.php";
 include "../includes/apiResponse.php";
 session_start();
 if($_SERVER['REQUEST_METHOD'] === 'POST')
-{
-   //$email=$_POST['email'];
-   
-   //validation rules
-   //alhalka_number
+{  
+     //user validation 
    $errors=[];
    if(!isset($_POST['name'])|| empty($_POST['name']))
         $errors[]=['name'=>'الاسم مطلوب'];

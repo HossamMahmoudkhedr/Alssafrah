@@ -5,9 +5,6 @@ include "../includes/setcookie.php";
 
 if($_SERVER['REQUEST_METHOD'] === 'POST')
 {
-   //$email=$_POST['email'];
-   
-   //validation rules
    $errors=[];
    if(!isset($_POST['email'])|| empty($_POST['email']))
         $errors[]=['email'=>'البريد الالكتروني مطلوب'];
@@ -49,11 +46,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
             return FailedResponse('فشل تسجيل المعلم تأكد من البريد الالكتروني و كلمه المرور ثم اعد المحاوله');
         }
         
-        unset($teacher['password']);//remove the password from the api response  
+        unset($teacher['password']);
         $teacher['type']='teacher';
         $teacher['type']='teacher';
         setCookies('teacher');
-        $expireTime = 3600 * 24; // 24 hour
+        $expireTime = 3600 * 24; 
         session_set_cookie_params($expireTime);
         session_start();
         $_SESSION['id'] =$teacher['id'];//log the teacher and save the valus of important things

@@ -4,9 +4,7 @@ include "../includes/apiResponse.php";
 include "../includes/setcookie.php";
 if($_SERVER['REQUEST_METHOD'] === 'POST')
 {
-   //$email=$_POST['email'];
-   
-   //validation rules
+    //user validation 
    $errors=[];
    if(!isset($_POST['email'])|| empty($_POST['email']))
         $errors[]=['email'=>"البريد الالكتروني مطلوب"];

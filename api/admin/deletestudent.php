@@ -4,6 +4,7 @@ include "../includes/apiResponse.php";
 session_start();
 if($_SERVER['REQUEST_METHOD'] === 'GET')
 {
+    //user validation 
    $errors=[];
    if(!isset($_GET['id'])||empty($_GET['id']))
         $errors[] = ['id' => 'required'];

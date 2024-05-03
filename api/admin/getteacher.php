@@ -4,6 +4,7 @@ include "../includes/apiResponse.php";
 session_start();
 if($_SERVER['REQUEST_METHOD'] === 'GET')
 {
+    //user validation 
    $errors=[];
    if(!isset($_GET['id'])||empty('id'))
         $errors[] = ['id' => 'required'];
@@ -16,7 +17,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET')
         return ValidationResponse("validation errors",$errors);
     }
     $id=$_GET['id'];
-    $query="SELECT * FROM teachers WHERE id = ?";
+    $query="SELECT id , name , phone , Alhalka_Number as alhalka_number   FROM teachers WHERE id = ?";
     $stm_teacher= mysqli_prepare($con,$query);
     $data=[];
     if($stm_teacher)
