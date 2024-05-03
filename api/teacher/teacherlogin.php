@@ -1,9 +1,8 @@
 <?php
 include "../includes/connection.php";
 include "../includes/apiResponse.php";
-$expireTime = 3600 * 24; // 24 hour
-session_set_cookie_params($expireTime);
-session_start();
+include "../includes/setcookie.php";
+
 if($_SERVER['REQUEST_METHOD'] === 'POST')
 {
    //$email=$_POST['email'];
@@ -49,12 +48,19 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
         {
             return FailedResponse('فشل تسجيل المعلم تأكد من البريد الالكتروني و كلمه المرور ثم اعد المحاوله');
         }
-        $_SESSION['teacher_email'] =$teacher['email'];//log the teacher and save the valus of important things
-        $_SESSION['type']='teacher';
+        
         unset($teacher['password']);//remove the password from the api response  
         $teacher['type']='teacher';
+        $teacher['type']='teacher';
+        setCookies('teacher');
+        $expireTime = 3600 * 24; // 24 hour
+        session_set_cookie_params($expireTime);
+        session_start();
+        $_SESSION['id'] =$teacher['id'];//log the teacher and save the valus of important things
+        $_SESSION['type']='teacher';
        return SuccessResponse("Done",$teacher);
     }
+
 }
 else{
     $errors[]=['security'=>'unsuppored method'];
