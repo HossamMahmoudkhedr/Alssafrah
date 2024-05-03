@@ -1,15 +1,11 @@
-export const requestData = (url, formData, method) => {
-	fetch(`http://localhost/php/Alssafrah/api/${url}`, {
-		method: method,
-		body: formData ? formData : {},
-	})
-		.then((response) => {
-			return response.json();
-		})
-		.then((data) => {
-			console.log(data);
-		})
-		.catch((error) => {
-			console.error('There was a problem with the fetch operation:', error);
-		});
+// Use this function to make a request
+// Pass the rest of the url and the from data and the method (POST or GET) as parameters
+
+export const requestData = async (url, req) => {
+	const response = await fetch(
+		`http://localhost/php/Alssafrah/api/${url}`,
+		req
+	);
+
+	return response.json();
 };

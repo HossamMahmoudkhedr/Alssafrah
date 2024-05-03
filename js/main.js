@@ -1,15 +1,19 @@
-import { user } from './formHandling.js';
+import { requestData } from './APIHandle.js';
+import { addParent, addStudent, addTeacher, getUserType } from './addUsers.js';
+
+// Selecting elements
 const sidebar = document.querySelector('.sidebar');
 const menu = document.querySelector('.menu');
 const close = document.querySelector('.close');
-const tableBody = document.querySelector('.table_body');
 const selectHalaka = document.querySelector('.select_halaka');
 
+// Handle sidebar in small screens
 const openSidebar = () => {
 	sidebar.classList.add('show');
 	document.body.style.overflowX = 'hidden';
 };
 
+// Handle sidebar in small screens
 const closeSidebar = () => {
 	sidebar.classList.remove('show');
 	document.body.style.overflowX = 'unset';
@@ -18,93 +22,44 @@ const closeSidebar = () => {
 menu.addEventListener('click', openSidebar);
 close.addEventListener('click', closeSidebar);
 
-const addTeacher = (teachersArr) => {
-	let html = ``;
-	teachersArr.map((teacher) => {
-		let content = `
-            <tr>
-				<th scope="row">${teacher.id}</th>
-				<td>${teacher.name}</td>
-				<td>${teacher.email}</td>
-				<td>${teacher.password}</td>
-				<td>${teacher.phone}</td>
-				<td>${teacher.Alhalka_Number}</td>
-				<td>تعديل \ حذف</td>
-			</tr>
-        `;
-		html += content;
+// This function used to show all the users in the tables in the admin pges
+export const getUsers = (addTeacher, addParent, addStudent) => {
+	let user = getUserType();
+
+	let url = '';
+	let addingFunction;
+
+	// We detect here the page where we are
+	if (user === 'addTeacher') {
+		url = 'admin/allteachers.php';
+		addingFunction = addTeacher;
+	} else if (user === 'addParent') {
+		url = 'admin/allparents.php';
+		addingFunction = addParent;
+	} else if (user === 'addStudent') {
+		url = 'admin/allstudents.php';
+		addingFunction = addStudent;
+	}
+
+	requestData(url, { method: 'GET' }).then((data) => {
+		addingFunction(data.data);
 	});
-	tableBody.innerHTML = html;
-};
-const addParent = (parentArr) => {
-	let html = ``;
-	parentArr.map((parent) => {
-		let content = `
-            <tr>
-				<th scope="row">${parent.id}</th>
-				<td>${parent.name}</td>
-				<td>${parent.phone}</td>
-				<td>${parent.password}</td>
-				<td>تعديل \ حذف</td>
-			</tr>
-        `;
-		html += content;
-	});
-	tableBody.innerHTML = html;
-};
-const addStudent = (studentArr) => {
-	let html = ``;
-	studentArr.map((student) => {
-		let content = `
-            <tr>
-				<th scope="row">${student.id}</th>
-				<td>${student.name}</td>
-				<td>${student.ssn}</td>
-				<td>${student.parent_phone}</td>
-				<td>${student.Alhalka_Number}</td>
-				<td>تعديل \ حذف</td>
-			</tr>
-        `;
-		html += content;
-	});
-	tableBody.innerHTML = html;
 };
 
 window.onload = () => {
+	// Getting all the available halakas from teacher api to add them to the dropdown in addStudent page
 	if (selectHalaka) {
-		fetch('http://localhost/php/Alssafrah/api/admin/allteachers.php')
-			.then((respones) => respones.json())
-			.then((data) => {
-				let html = ``;
-				data.data.map((el) => {
-					html += `
+		requestData('admin/allteachers.php', { method: 'GET' }).then((data) => {
+			let html = ``;
+			data.data.map((el) => {
+				html += `
 					<option value=${el.Alhalka_Number}>${el.Alhalka_Number}</option>
 				`;
-				});
-				selectHalaka.innerHTML = html;
 			});
+			selectHalaka.innerHTML = html;
+		});
 	}
 
-	if (user === 'addTeacher') {
-		fetch('http://localhost/php/Alssafrah/api/admin/allteachers.php')
-			.then((respones) => respones.json())
-			.then((data) => {
-				addTeacher(data.data);
-			});
-	}
-
-	if (user === 'addParent') {
-		fetch('http://localhost/php/Alssafrah/api/admin/allparents.php')
-			.then((respones) => respones.json())
-			.then((data) => {
-				addParent(data.data);
-			});
-	}
-	if (user === 'addStudent') {
-		fetch('http://localhost/php/Alssafrah/api/admin/allstudents.php')
-			.then((respones) => respones.json())
-			.then((data) => {
-				addStudent(data.data);
-			});
-	}
+	// Show all the users in the tabels when the window loaded
+	getUsers(addTeacher, addParent, addStudent);
 };
