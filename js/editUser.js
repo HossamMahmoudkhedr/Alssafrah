@@ -6,7 +6,7 @@ const tabelBody = document.querySelector('.table_body');
 const inputs = document.querySelectorAll('input');
 const button = document.querySelector('button');
 const selectHalaka = document.querySelector('.select_halaka');
-// http://localhost/php/Alssafrah/api/admin/getteacher.php?id=3
+
 let url = '';
 let editUrl = '';
 const user = getUserType();

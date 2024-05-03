@@ -125,6 +125,29 @@ h2 {
 	cursor: pointer;
 }
 
+.checkbox_replacement {
+	width: 20px;
+	height: 20px;
+	border: 1px solid black;
+	border-radius: 0.25rem;
+	background-color: transparent;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.checkbox_replacement.show {
+	background-color: var(--light-green);
+}
+
+.checkbox_replacement span {
+	display: none;
+}
+
+.checkbox_replacement span.show {
+	display: block;
+}
 /* End General */
 
 /* Start Index Page */
