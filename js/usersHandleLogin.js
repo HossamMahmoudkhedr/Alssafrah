@@ -20,7 +20,6 @@ let person = '';
 window.onload = () => {
 	if (user === 'teacherLogin') {
 		person = 'teacher';
-		document.cookie = 'loginName=teacher;';
 		url = 'pages/studentsBoard.html';
 	} else if (user === 'studentLogin') {
 		person = 'student';
