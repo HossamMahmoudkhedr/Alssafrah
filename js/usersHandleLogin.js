@@ -20,6 +20,7 @@ let person = '';
 window.onload = () => {
 	if (user === 'teacherLogin') {
 		person = 'teacher';
+		document.cookie = 'loginName=teacher;';
 		url = 'pages/studentsBoard.html';
 	} else if (user === 'studentLogin') {
 		person = 'student';
@@ -40,12 +41,10 @@ form.addEventListener('submit', (e) => {
 	requestData(`${person}/${user.toLowerCase()}.php`, {
 		method: 'POST',
 		body: formData,
-	})
-		.then((data) => {
-			console.log(data);
+	}).then((data) => {
+		console.log(data);
+		if (data.success) {
 			window.location.href = `http://localhost/php/Alssafrah/${url}`;
-		})
-		.catch((error) => {
-			console.error('There was a problem with the fetch operation:', error);
-		});
+		}
+	});
 });

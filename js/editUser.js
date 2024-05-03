@@ -45,9 +45,25 @@ const edit = (id) => {
 				inputs.forEach((input) => {
 					input.value = '';
 				});
+				if (user === 'addStudent') {
+					selectHalaka.value = '1';
+				}
 				button.innerText = 'إضافة';
 			});
 		};
+	});
+};
+
+const remove = (id) => {
+	if (user === 'addTeacher') {
+		url = `admin/deleteteacher.php?id=${id}`;
+	} else if (user === 'addParent') {
+		url = `admin/deleteparent.php?id=${id}`;
+	} else if (user === 'addStudent') {
+		url = `admin/deletestudent.php?id=${id}`;
+	}
+	requestData(url, { method: 'GET' }).then((data) => {
+		getUsers(addTeacher, addParent, addStudent);
 	});
 };
 
@@ -60,7 +76,7 @@ const handleButtons = (e) => {
 			setMode('edit');
 			edit(id);
 		} else if (stauts === 'trash') {
-			console.log(id);
+			remove(id);
 		}
 	}
 };
