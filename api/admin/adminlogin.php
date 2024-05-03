@@ -1,9 +1,7 @@
 <?php
 include "../includes/connection.php";
 include "../includes/apiResponse.php";
-$expireTime = 3600 * 24; // 24 hour
-session_set_cookie_params($expireTime);
-session_start();
+include "../includes/setcookie.php";
 if($_SERVER['REQUEST_METHOD'] === 'POST')
 {
    //$email=$_POST['email'];
@@ -49,10 +47,14 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
         {
             return FailedResponse('فشل تسجيل الدخول برجاء التأكد من البريد الالكتروني وكلمه السر ');
         }
-        $_SESSION['id'] =$admin['id'];//log the admin and save the valus of important things
-        $_SESSION['type']='admin';
         unset($admin['password']);//remove the password from the api response  
         $admin['type']='admin';
+        setCookies('admin');
+        $expireTime = 3600 * 24; // 24 hour
+        session_set_cookie_params($expireTime);
+        session_start();
+        $_SESSION['id'] =$admin['id'];//log the admin and save the valus of important things
+        $_SESSION['type']='admin';
        return SuccessResponse("تم",$admin);
     }
 }
