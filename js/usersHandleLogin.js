@@ -14,31 +14,38 @@ input.forEach((el) => {
 		formData.append(el.name, el.value);
 	};
 });
-
+let url = '';
+let user = getUserType();
+let person = '';
+window.onload = () => {
+	if (user === 'teacherLogin') {
+		person = 'teacher';
+		url = 'pages/studentsBoard.html';
+	} else if (user === 'studentLogin') {
+		person = 'student';
+		url = 'pages/studentResults.html';
+	} else if (user === 'parentLogin') {
+		person = 'parent';
+		url = 'pages/childrenBoard.html';
+	} else if (user === 'adminLogin') {
+		person = 'admin';
+		url = 'pages/addTeacher.html';
+	}
+	formData.append('type', person);
+};
 // Here we get the password value and save it in the formData object
 form.addEventListener('submit', (e) => {
 	e.preventDefault();
 
-	requestData('admin/adminlogin.php', { method: 'POST', body: formData })
+	requestData(`${person}/${user.toLowerCase()}.php`, {
+		method: 'POST',
+		body: formData,
+	})
 		.then((data) => {
 			console.log(data);
-			window.location.href =
-				'http://localhost/php/Alssafrah/pages/addTeacher.html';
+			window.location.href = `http://localhost/php/Alssafrah/${url}`;
 		})
 		.catch((error) => {
 			console.error('There was a problem with the fetch operation:', error);
 		});
 });
-
-window.onload = () => {
-	let user = getUserType();
-	if (user === 'teacherLogin') {
-		formData.append('type', 'teacher');
-	} else if (user === 'studentLogin') {
-		formData.append('type', 'student');
-	} else if (user === 'parentLogin') {
-		formData.append('type', 'parent');
-	} else if (user === 'adminLogin') {
-		formData.append('type', 'admin');
-	}
-};
