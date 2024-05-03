@@ -1,8 +1,10 @@
 import { requestData } from './APIHandle.js';
 import { getUserType } from './addUsers.js';
+import { mode, setMode } from './main.js';
 
 const tabelBody = document.querySelector('.table_body');
 const inputs = document.querySelectorAll('input');
+const button = document.querySelector('button');
 // http://localhost/php/Alssafrah/api/admin/getteacher.php?id=3
 let url = '';
 const user = getUserType();
@@ -18,6 +20,13 @@ const edit = (id) => {
 		inputs.forEach((input) => {
 			input.value = data.data[input.name];
 		});
+
+		button.innerText = 'تعديل';
+		button.onclick = () => {
+			console.log('clicked');
+			setMode('insert');
+			button.innerText = 'إضافة';
+		};
 	});
 };
 
@@ -27,6 +36,7 @@ const handleButtons = (e) => {
 		const stauts = target.getAttribute('id');
 		const id = target.parentElement.parentElement.getAttribute('data-id');
 		if (stauts === 'edit') {
+			setMode('edit');
 			edit(id);
 		} else if (stauts === 'trash') {
 			console.log(id);

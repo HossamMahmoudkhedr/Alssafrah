@@ -1,6 +1,10 @@
 import { requestData } from './APIHandle.js';
 import { addParent, addStudent, addTeacher, getUserType } from './addUsers.js';
 
+export let mode = 'insert';
+export const setMode = (value) => {
+	mode = value;
+};
 // Selecting elements
 const sidebar = document.querySelector('.sidebar');
 const menu = document.querySelector('.menu');

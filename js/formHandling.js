@@ -1,6 +1,6 @@
 import { requestData } from './APIHandle.js';
 import { addParent, addTeacher, addStudent } from './addUsers.js';
-import { getUsers } from './main.js';
+import { getUsers, mode } from './main.js';
 import { getUserType } from './addUsers.js';
 
 const form = document.querySelector('form');
@@ -19,20 +19,22 @@ let url = '';
 
 form.addEventListener('submit', (e) => {
 	e.preventDefault();
-	let user = getUserType();
-	if (user === 'addTeacher') {
-		url = 'admin/addteacher.php';
-	} else if (user === 'addParent') {
-		url = 'admin/addparent.php';
-	} else if (user === 'addStudent') {
-		url = 'admin/addstudent.php';
-		formData.append(selectHalaka.name, selectHalaka.value);
-	}
-	requestData(url, { method: 'POST', body: formData }).then((data) => {
-		console.log(data);
-		getUsers(addTeacher, addParent, addStudent);
-		input.forEach((el) => {
-			el.value = '';
+	if (mode === 'insert') {
+		let user = getUserType();
+		if (user === 'addTeacher') {
+			url = 'admin/addteacher.php';
+		} else if (user === 'addParent') {
+			url = 'admin/addparent.php';
+		} else if (user === 'addStudent') {
+			url = 'admin/addstudent.php';
+			formData.append(selectHalaka.name, selectHalaka.value);
+		}
+		requestData(url, { method: 'POST', body: formData }).then((data) => {
+			console.log(data);
+			getUsers(addTeacher, addParent, addStudent);
+			input.forEach((el) => {
+				el.value = '';
+			});
 		});
-	});
+	}
 });
