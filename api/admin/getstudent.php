@@ -17,7 +17,9 @@ if($_SERVER['REQUEST_METHOD'] === 'GET')
         return ValidationResponse("validation errors",$errors);
     }
     $id=$_GET['id'];
-    $query="SELECT * FROM students WHERE id = ?";
+    //$query="SELECT id , name , FROM students ";
+    $query="SELECT students.id,ssn,students.parent_phone,students.name AS name ,  teachers.Alhalka_Number  as alhalka_number FROM students JOIN teachers ON students.teacher_id = teachers.id WHERE  students.id = ?";
+
     $stm_student= mysqli_prepare($con,$query);
     $data=[];
     if($stm_student)
