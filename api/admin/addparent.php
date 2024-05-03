@@ -25,6 +25,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
     $phone=$_POST['phone'];
     $admin_id=$_SESSION['id'];
     $admin_id = (int)$admin_id;
+    //check if there is exist phone in the table 
     $query="SELECT phone FROM parents WHERE phone = ?";
     $stm_phone= mysqli_prepare($con,$query);
     if($stm_phone)
@@ -38,6 +39,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
             return FailedResponse('هذا الجوال مستخدم بلفعل');
         }
     }
+    //insert data into the table 
     $query = "INSERT INTO parents (name,password,phone, admin_id ) VALUES(?,?,?,?)";
     $stm = mysqli_prepare($con, $query);
     if ($stm) {

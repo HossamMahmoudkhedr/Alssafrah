@@ -1,37 +1,53 @@
 <?php
-include "../includes/connection.php";
-include "../includes/apiResponse.php";
+// Including necessary files
+include "../includes/connection.php"; // Include database connection file
+include "../includes/apiResponse.php"; // Include API response file
+
+// Starting session
 session_start();
-if($_SERVER['REQUEST_METHOD'] === 'POST')
-{
-    //user validation 
-   $errors=[];
-   if(!isset($_POST['name'])|| empty($_POST['name']))
+
+// Checking if the request method is POST
+if($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // User validation 
+    $errors=[];
+
+    // Check if name is set and not empty
+    if(!isset($_POST['name']) || empty($_POST['name']))
         $errors[]=['name'=>'الاسم مطلوب'];
-   if(!isset($_POST['email'])|| empty($_POST['email']))
+
+    // Check if email is set and not empty, and validate its format
+    if(!isset($_POST['email']) || empty($_POST['email']))
         $errors[]=['email'=>'البريد الالكتروني مطلوب'];
-    else 
-    {
+    else {
         $email=$_POST['email'];
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $errors[] = ['email' => 'البريد الاكتروني غير صحيح'];
         }
     }
-    if(!isset($_POST['phone'])|| empty($_POST['phone']))
+
+    // Check if phone is set and not empty
+    if(!isset($_POST['phone']) || empty($_POST['phone']))
         $errors[]=['phone'=>'رقم الجوال مطلوب'];
-    if(!isset($_POST['password'])|| empty($_POST['password']))
+
+    // Check if password is set and not empty
+    if(!isset($_POST['password']) || empty($_POST['password']))
         $errors[]=['password'=>'كلمه المرور مطلوبه'];
-    if(!isset($_POST['alhalka_number'])|| empty($_POST['alhalka_number']))
-    $errors[]=['alhalka_number'=>'رقم الحلقه مطلوب'];
+
+    // Check if alhalka_number is set and not empty
+    if(!isset($_POST['alhalka_number']) || empty($_POST['alhalka_number']))
+        $errors[]=['alhalka_number'=>'رقم الحلقه مطلوب'];
     
-    if(!isset($_SESSION['type'])||$_SESSION['type']!='admin')
-    {
+    // Check if session type is set and equals 'admin'
+    if(!isset($_SESSION['type']) || $_SESSION['type']!='admin') {
         $errors[]=['security'=>'غير مسموح بل دخول هنا'];
     }
-    if(!empty($errors))
-    {
+
+    // If there are validation errors, return validation response
+    if(!empty($errors)) {
         return ValidationResponse("validation errors",$errors);
     }
+
+    // Assigning variables from POST data
     $name=$_POST['name'];
     $email=$_POST['email'];
     $password=$_POST['password'];
@@ -39,62 +55,76 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
     $admin_id=$_SESSION['id'];
     $admin_id = (int)$admin_id;
     $alhalka_number=$_POST['alhalka_number'];
-    // get the teacher email
+
+    // Check if the email already exists in the database
     $query="SELECT email FROM teachers WHERE email = ?";
     $stm_email= mysqli_prepare($con,$query);
-    if($stm_email)
-    {
+
+    // If statement is prepared successfully
+    if($stm_email) {
         mysqli_stmt_bind_param($stm_email,'s',$email);
         mysqli_stmt_execute($stm_email);
         $result = mysqli_stmt_get_result($stm_email);
         $teacher = mysqli_fetch_assoc($result);
-        if($teacher)
-        {
+
+        // If email already exists, return failed response
+        if($teacher) {
             return FailedResponse('البريد الالكتروني موجود');
         }
     }
+
+    // Check if the phone already exists in the database
     $query="SELECT phone FROM teachers WHERE phone = ?";
     $stm_phone= mysqli_prepare($con,$query);
-    if($stm_phone)
-    {
+
+    // If statement is prepared successfully
+    if($stm_phone) {
         mysqli_stmt_bind_param($stm_phone,'s',$phone);
         mysqli_stmt_execute($stm_phone);
         $result = mysqli_stmt_get_result($stm_phone);
         $teacher = mysqli_fetch_assoc($result);
-        if($teacher)
-        {
+
+        // If phone already exists, return failed response
+        if($teacher) {
             return FailedResponse('رقم الجوال موجود');
         }
     }
+
+    // Check if the alhalka_number already exists in the database
     $query="SELECT Alhalka_Number FROM teachers WHERE Alhalka_Number = ?";
     $stm_nlhalka_number= mysqli_prepare($con,$query);
-    if($stm_nlhalka_number)
-    {
+
+    // If statement is prepared successfully
+    if($stm_nlhalka_number) {
         mysqli_stmt_bind_param($stm_nlhalka_number,'s',$alhalka_number);
         mysqli_stmt_execute($stm_nlhalka_number);
         $result = mysqli_stmt_get_result($stm_nlhalka_number);
         $teacher = mysqli_fetch_assoc($result);
-        if($teacher)
-        {
+
+        // If alhalka_number already exists, return failed response
+        if($teacher) {
             return FailedResponse('رقم الحلقه موجود');
         }
     }
+
+    // Insert teacher data into database
     $query="INSERT INTO teachers (name,email,password,phone,Alhalka_Number, admin_id ) VALUES(?,?,?,?,?,?)";
     $stm=mysqli_prepare($con,$query);
-    if($stm)
-    {
+
+    // If statement is prepared successfully
+    if($stm) {
         mysqli_stmt_bind_param($stm,'ssssss',$name,$email,$password,$phone,$alhalka_number,$admin_id);
         $result=mysqli_stmt_execute($stm);
-       // $result = mysqli_stmt_get_result($stm);
-        //$teacher = mysqli_fetch_assoc($result);
-        if(!$result)
-        {
+
+        // If insertion fails, return failed response
+        if(!$result) {
             return FailedResponse('فشل اضافه المعلم');
         }
-       return SuccessResponse("تمت اضافه المعلم");
+        // Return success response
+        return SuccessResponse("تمت اضافه المعلم");
     }
-}
-else{
+} else {
+    // If request method is not POST, return security error
     $errors[]=['security'=>'طريقه غير صحيحه'];
     ValidationResponse("validation errors",$errors);
 }

@@ -1,62 +1,90 @@
 <?php
-include "../includes/connection.php";
-include "../includes/apiResponse.php";
-include "../includes/setcookie.php";
-if($_SERVER['REQUEST_METHOD'] === 'POST')
-{
-    //user validation 
-   $errors=[];
-   if(!isset($_POST['email'])|| empty($_POST['email']))
+// Including necessary files
+include "../includes/connection.php"; // Include database connection file
+include "../includes/apiResponse.php"; // Include API response file
+include "../includes/setcookie.php"; // Include setcookie utility
+
+// Check if the request method is POST
+if($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // User validation
+    $errors=[];
+
+    // Check if email is set and not empty
+    if(!isset($_POST['email']) || empty($_POST['email']))
         $errors[]=['email'=>"البريد الالكتروني مطلوب"];
-    else 
-    {
+    else {
         $email=$_POST['email'];
+        // Validate email format
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $errors[] = ['email' => 'البريد الاكتروني غير صحيح'];
         }
     }
-    if(!isset($_POST['password'])|| empty($_POST['password']))
+
+    // Check if password is set and not empty
+    if(!isset($_POST['password']) || empty($_POST['password']))
         $errors[]=['password'=>'كلمه المرور مطلوبه'];
-    if(!isset($_POST['type'])|| empty($_POST['type']))
+
+    // Check if type is set and not empty
+    if(!isset($_POST['type']) || empty($_POST['type']))
         $errors[]=['type'=>'type must be provided'];
-    else if($_POST['type']!='admin'&&$_POST['type']!='Admin')
-    {
+    else if($_POST['type']!='admin' && $_POST['type']!='Admin') {
         $errors[]=['security'=>'غير مسموح بل دخول هنا'];
     }
-    if(!empty($errors))
-    {
-        return ValidationResponse("validation errors",$errors);
+
+    // If there are validation errors, return validation response
+    if(!empty($errors)) {
+        return ValidationResponse("validation errors", $errors);
     }
+
+    // Get password from the form
     $password=$_POST['password'];
-    // get the admin email
+
+    // Get the admin email from the database
     $query="SELECT * FROM admins WHERE email = ?";
     $stm= mysqli_prepare($con,$query);
-    if($stm)
-    {
+
+    // If statement is prepared successfully
+    if($stm) {
         mysqli_stmt_bind_param($stm,'s',$email);
         mysqli_stmt_execute($stm);
         $result = mysqli_stmt_get_result($stm);
         $admin = mysqli_fetch_assoc($result);
-        if(!$admin)
-        {
+
+        // If admin not found, return failed response
+        if(!$admin) {
             return FailedResponse('فشل تسجيل الدخول برجاء التأكد من البريد الالكتروني وكلمه السر ');
         }
-        if(!password_verify($password,$admin['password']))
-        {
+
+        // If password does not match, return failed response
+        if(!password_verify($password,$admin['password'])) {
             return FailedResponse('فشل تسجيل الدخول برجاء التأكد من البريد الالكتروني وكلمه السر ');
         }
-        unset($admin['password']);//remove the password from the api response  
+
+        // Remove the password from the API response
+        unset($admin['password']);
+
+        // Add admin type
         $admin['type']='admin';
+
+        // Set cookies for admin
         setCookies('admin');
-        $expireTime = 3600 * 24; // 24 hour
+
+        // Set session expiration time
+        $expireTime = 3600 * 24; // 24 hours
+
+        // Start session
         session_set_cookie_params($expireTime);
         session_start();
-        $_SESSION['id'] =$admin['id'];//log the admin and save the valus of important things
+
+        // Log the admin and save important values in session
+        $_SESSION['id'] = $admin['id'];
         $_SESSION['type']='admin';
-       return SuccessResponse("تم",$admin);
+
+        // Return success response with admin details
+        return SuccessResponse("تم",$admin);
     }
-}
-else{
+} else {
+    // If request method is not POST, return security error
     $errors[]=['security'=>'طريقه غير صحيحه'];
     ValidationResponse("validation errors",$errors);
 }
