@@ -17,7 +17,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET')
         return ValidationResponse("validation errors",$errors);
     }
     $id=$_GET['id'];
-    $query="SELECT id , name , phone , Alhalka_Number as alhalka_number   FROM teachers WHERE id = ?";
+    $query="SELECT id , name , phone ,email, Alhalka_Number as alhalka_number , password   FROM teachers WHERE id = ?";
     $stm_teacher= mysqli_prepare($con,$query);
     $data=[];
     if($stm_teacher)
