@@ -1,31 +1,52 @@
 import { requestData } from './APIHandle.js';
-import { getUserType } from './addUsers.js';
-import { mode, setMode } from './main.js';
+import { addParent, addStudent, addTeacher, getUserType } from './addUsers.js';
+import { getUsers, mode, setMode } from './main.js';
 
 const tabelBody = document.querySelector('.table_body');
 const inputs = document.querySelectorAll('input');
 const button = document.querySelector('button');
+const selectHalaka = document.querySelector('.select_halaka');
 // http://localhost/php/Alssafrah/api/admin/getteacher.php?id=3
 let url = '';
+let editUrl = '';
 const user = getUserType();
 const edit = (id) => {
+	const formData = new FormData();
 	if (user === 'addTeacher') {
 		url = `admin/getteacher.php?id=${id}`;
+		editUrl = 'admin/editteacher.php';
 	} else if (user === 'addParent') {
 		url = `admin/getparent.php?id=${id}`;
+		editUrl = 'admin/editparent.php';
 	} else if (user === 'addStudent') {
 		url = `admin/getstudent.php?id=${id}`;
+		editUrl = 'admin/editstudent.php';
 	}
 	requestData(url, { method: 'GET' }).then((data) => {
 		inputs.forEach((input) => {
 			input.value = data.data[input.name];
 		});
-
+		if (user === 'addStudent') {
+			selectHalaka.value = data.data['alhalka_number'];
+		}
 		button.innerText = 'تعديل';
+
 		button.onclick = () => {
-			console.log('clicked');
-			setMode('insert');
-			button.innerText = 'إضافة';
+			formData.append('id', id);
+			inputs.forEach((input) => {
+				formData.append(input.name, input.value);
+			});
+			if (user === 'addStudent') {
+				formData.append(selectHalaka.name, selectHalaka.value);
+			}
+			requestData(editUrl, { method: 'POST', body: formData }).then((data) => {
+				getUsers(addTeacher, addParent, addStudent);
+				setMode('insert');
+				inputs.forEach((input) => {
+					input.value = '';
+				});
+				button.innerText = 'إضافة';
+			});
 		};
 	});
 };
