@@ -37,9 +37,13 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
         {
             return FailedResponse('فشل تسجيل دخول المستخدم اعد المحاوله بأستخدام رقم هويه صحيح');
         }
+        $student['type']='student';
+        setCookies('student');
+        $expireTime = 3600 * 24; // 24 hour
+        session_set_cookie_params($expireTime);
+        session_start();
         $_SESSION['id'] =$student['id'];//log the student and save the valus of important things
         $_SESSION['type']='student';
-        $parent['type']='student';
        return SuccessResponse("Done",$student);
     }
 }

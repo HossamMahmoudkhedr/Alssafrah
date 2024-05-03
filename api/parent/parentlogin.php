@@ -1,9 +1,8 @@
 <?php
 include "../includes/connection.php";
 include "../includes/apiResponse.php";
-$expireTime = 3600 * 24; // 24 hour
-session_set_cookie_params($expireTime);
-session_start();
+include "../includes/setcookie.php";
+
 if($_SERVER['REQUEST_METHOD'] === 'POST')
 {
    
@@ -44,9 +43,14 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
         {
             return FailedResponse("فشل تسجيل دخول ولي الامر تحقق من كلمه المرور او رقم الجوال واعد المحاوله");
         }
+      
+        $parent['type']='parent';
+        setCookies('parent');
+        $expireTime = 3600 * 24; // 24 hour
+        session_set_cookie_params($expireTime);
+        session_start();
         $_SESSION['id'] =$parent['id'];//log the parent and save the valus of important things
         $_SESSION['type']='parent';
-        $parent['type']='parent';
        return SuccessResponse("Done",$parent);
     }
 }
