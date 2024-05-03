@@ -36,7 +36,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!isset($_POST['alhalka_number']) || empty($_POST['alhalka_number'])) {
         $errors[] = ['alhalka_number' => 'required'];
     }
-
+    if (!isset($_POST['password']) ||empty($_POST['password'])) {
+        $errors[] = ['password' => 'كلمه المرور مطلوبه'];
+    }
     // Check admin authorization
     if (!isset($_SESSION['type']) || $_SESSION['type'] !== 'admin') {
         $errors[] = ['security' => 'unauthorized'];
@@ -53,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $phone = $_POST['phone'];
     $alhalka_number = $_POST['alhalka_number'];
-    $password = isset($_POST['newpassword']) ? $_POST['newpassword'] : null;
+    $password =$_POST['password'];
 
     $query = "SELECT * FROM teachers WHERE id=?";
     $stm_teachers = mysqli_prepare($con, $query);

@@ -13,8 +13,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!isset($_POST['phone']) || empty($_POST['phone']))
         $errors[] = ['phone' => 'رقم الجوال مطلوب'];
     $password = null;
-    if (isset($_POST['newpassword']) && !empty($_POST['newpassword'])) {
-        $password = $_POST['newpassword'];
+    if (!isset($_POST['password']) ||empty($_POST['password'])) {
+        $errors[] = ['password' => 'كلمه المرور مطلوبه'];
     }
     if (!isset($_SESSION['type']) || $_SESSION['type'] !== 'admin') {
         $errors[] = ['security' => 'unauthorized'];
