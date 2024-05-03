@@ -11,10 +11,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
    //validation rules
    $errors=[];
    if(!isset($_POST['phone'])|| empty($_POST['phone']))
-        $errors[]=['phone'=>'required'];
+        $errors[]=['phone'=>'الجوال مطلوب'];
     
     if(!isset($_POST['password'])|| empty($_POST['password']))
-        $errors[]=['password'=>'required'];
+        $errors[]=['password'=>'كلمه المرور مطلوبه '];
     if(!isset($_POST['type'])|| empty($_POST['type']))
     $errors[]=['type'=>'type must be provided'];
     else if($_POST['type']!='parent'&&$_POST['type']!='Parent')
@@ -38,11 +38,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
         $parent = mysqli_fetch_assoc($result);
         if(!$parent)
         {
-            return FailedResponse('Failed to login parent incorrect password or phone $password');
+            return FailedResponse('لا يوجد ولي امر بهذه البيانات');
         }
         if($password!==$parent['password'])
         {
-            return FailedResponse("Failed to login parent incorrect password or phone $password");
+            return FailedResponse("فشل تسجيل دخول ولي الامر تحقق من كلمه المرور او رقم الجوال واعد المحاوله");
         }
         $_SESSION['id'] =$parent['id'];//log the parent and save the valus of important things
         $_SESSION['type']='parent';

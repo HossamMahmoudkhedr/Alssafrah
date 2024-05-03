@@ -6,11 +6,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 {
    $errors=[];
    if(!isset($_POST['name'])|| empty($_POST['name']))
-        $errors[]=['name'=>'required'];
-    if(!isset($_POST['ssn'])|| empty($_POST['ssn']))
-    $errors[]=['ssn'=>'required'];
+        $errors[]=['name'=>'الاسم مطلوب'];
+   if(!isset($_POST['ssn'])|| empty($_POST['ssn']))
+    $errors[]=['ssn'=>'رقم الهويه مطلوب'];
     if(!isset($_POST['parent_phone'])|| empty($_POST['parent_phone']))
-        $errors[]=['parent_phone'=>'required'];
+        $errors[]=['parent_phone'=>'رقم جوال الوالد مطلوب'];
     if(!isset($_POST['alhalka_number'])|| empty($_POST['alhalka_number']))
     $errors[]=['alhalka_number'=>'required'];
     if (!isset($_POST['id']) || empty($_POST['id'])) {

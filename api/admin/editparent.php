@@ -5,12 +5,12 @@ session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = [];
     if (!isset($_POST['name']) || empty($_POST['name']))
-        $errors[] = ['name' => 'required'];
+        $errors[]=['name'=>'الاسم مطلوب'];
     if (!isset($_POST['id']) || empty($_POST['id']))
         $errors[] = ['id' => 'required'];
    
     if (!isset($_POST['phone']) || empty($_POST['phone']))
-        $errors[] = ['phone' => 'required'];
+        $errors[] = ['phone' => 'رقم الجوال مطلوب'];
     $password = null;
     if (isset($_POST['newpassword']) && !empty($_POST['newpassword'])) {
         $password = $_POST['newpassword'];
@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $result = mysqli_stmt_get_result($stm_phone);
                     $parent_phone = mysqli_fetch_assoc($result);
                     if ($parent_phone !== null && $parent_phone['id'] !== $id) {
-                        return FailedResponse('This user phone is already in use');
+                        return FailedResponse('رقم الجوال مستخدم بل فعل');
                     }
                 }
             }
@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             mysqli_stmt_execute($stm_student);
             $result = mysqli_stmt_get_result($stm_student);
         } else {
-            return FailedResponse('User not found');
+            return FailedResponse('المستخدم غير موجود');
         }
     }
     return SuccessResponse("Done");

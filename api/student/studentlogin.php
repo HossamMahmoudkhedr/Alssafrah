@@ -11,7 +11,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
    //validation rules
    $errors=[];
    if(!isset($_POST['ssn'])|| empty($_POST['ssn']))
-        $errors[]=['ssn'=>'required'];
+        $errors[]=['ssn'=>'رقم الهويه مطلوب'];
     
     if(!isset($_POST['type'])|| empty($_POST['type']))
     $errors[]=['type'=>'type must be provided'];
@@ -35,7 +35,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
         $student = mysqli_fetch_assoc($result);
         if(!$student)
         {
-            return FailedResponse('Failed to login student incorrect password or phone $password');
+            return FailedResponse('فشل تسجيل دخول المستخدم اعد المحاوله بأستخدام رقم هويه صحيح');
         }
         $_SESSION['id'] =$student['id'];//log the student and save the valus of important things
         $_SESSION['type']='student';

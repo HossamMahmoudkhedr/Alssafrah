@@ -7,8 +7,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET')
    $errors=[];
    if(!isset($_SESSION['type'])||$_SESSION['type']!='admin')
     {
-        $errors[]=['security'=>'unauthorized'];
-    }
+        $errors[]=['security'=>'غير مسموح بل دخول هنا'];    }
     if(!empty($errors))
     {
         return ValidationResponse("validation errors",$errors);

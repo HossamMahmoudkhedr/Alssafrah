@@ -11,16 +11,16 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
    //validation rules
    $errors=[];
    if(!isset($_POST['email'])|| empty($_POST['email']))
-        $errors[]=['email'=>'required'];
+        $errors[]=['email'=>'البريد الالكتروني مطلوب'];
     else 
     {
         $email=$_POST['email'];
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $errors[] = ['email' => 'Invalid email format'];
+            $errors[] = ['email' => 'بريد الكتروني غير صحيح'];
         }
     }
     if(!isset($_POST['password'])|| empty($_POST['password']))
-        $errors[]=['password'=>'required'];
+        $errors[]=['password'=>'كلمه المرور مطلوبه'];
     if(!isset($_POST['type'])|| empty($_POST['type']))
     $errors[]=['type'=>'type must be provided'];
     else if($_POST['type']!='teacher'&&$_POST['type']!='Teacher')
@@ -43,11 +43,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
         $teacher = mysqli_fetch_assoc($result);
         if(!$teacher)
         {
-            return FailedResponse('Failed to login teacher in correct password or email ');
+            return FailedResponse('فشل التسجيل لا يوجد معلم بذه البيانات ');
         }
         if($password!==$teacher['password'])
         {
-            return FailedResponse('Failed to login teacher in correct password or email');
+            return FailedResponse('فشل تسجيل المعلم تأكد من البريد الالكتروني و كلمه المرور ثم اعد المحاوله');
         }
         $_SESSION['teacher_email'] =$teacher['email'];//log the teacher and save the valus of important things
         $_SESSION['type']='teacher';
