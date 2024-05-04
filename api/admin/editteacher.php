@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Check if there are validation errors
     if (!empty($errors)) {
-        return ValidationResponse("Validation errors", $errors);
+        return ValidationResponse("خطأ في ادخال البيانات",$errors);
     }
 
     // Extract data from POST
