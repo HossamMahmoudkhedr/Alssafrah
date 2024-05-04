@@ -45,6 +45,16 @@
 			</svg>
 		</span>
 		<div class="sidebar">
+			<div
+				class="position-absolute"
+				style="left: 20px; bottom: 25px; z-index: 2">
+				<a
+					href="../index.html"
+					id="logOut"
+					class="btn btn-secondary px-4 py-2"
+					>تسجيل الخروج</a
+				>
+			</div>
 			<span class="close">
 				<svg
 					width="45"
@@ -173,5 +183,21 @@
 		<script
 			type="module"
 			src="../js/handleResponsive.js"></script>
+		<script>
+			const type = window.localStorage.getItem('type');
+			if (!type) {
+				window.location.href = 'http://localhost/php/Alssafrah/';
+			}
+			if (type === 'student') {
+				window.location.href =
+					'http://localhost/php/Alssafrah/pages/studentResults.html';
+			} else if (type === 'teacher') {
+				window.location.href =
+					'http://localhost/php/Alssafrah/pages/achievements.html';
+			} else if (type === 'parent') {
+				window.location.href =
+					'http://localhost/php/Alssafrah/pages/childrenBoard.html';
+			}
+		</script>
 	</body>
 </html>

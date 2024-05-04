@@ -4,6 +4,7 @@ const sidebar = document.querySelector('.sidebar');
 const menu = document.querySelector('.menu');
 const close = document.querySelector('.close');
 const username = document.getElementById('username');
+const logOut = document.getElementById('logOut');
 
 // Handle sidebar in small screens
 const openSidebar = () => {
@@ -28,4 +29,11 @@ const getUserName = () => {
 	});
 };
 
+const logUserOut = () => {
+	requestData('logout.php').then((data) => {
+		window.localStorage.clear();
+	});
+};
+
 window.addEventListener('DOMContentLoaded', getUserName);
+logOut.addEventListener('click', logUserOut);
