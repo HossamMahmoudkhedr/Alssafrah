@@ -11,9 +11,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET') {
     // User validation 
     $errors=[];
 
-    // Check if id is set and not empty
-    if(!isset($_GET['id']) || empty($_GET['id']))
-        $errors[] = ['id' => 'required'];
+   
 
     // Check if session type is set and equals 'admin'
     if(!isset($_SESSION['type']) || $_SESSION['type']!='admin') {
