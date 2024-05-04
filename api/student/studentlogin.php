@@ -23,7 +23,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
     }
     $ssn=$_POST['ssn'];
     // get the student ssn
-    $query="SELECT * FROM students WHERE ssn = ?";
+    $query="SELECT id , name, ssn,parent_phone FROM students WHERE ssn = ?";
     $stm= mysqli_prepare($con,$query);
     if($stm)
     {
