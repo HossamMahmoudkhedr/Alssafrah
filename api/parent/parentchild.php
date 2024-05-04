@@ -34,6 +34,16 @@ if($_SERVER['REQUEST_METHOD'] === 'GET')
             $data[]= $student;
         }
     }
+    if (isset($student['behavior']) && is_string($student['behavior'])) {
+        $behaviorArray = json_decode($student['behavior']);
+        if ($behaviorArray !== null) {
+            // If decoding was successful, implode the array
+            $student['behavior'] = implode(',', $behaviorArray);
+        } else {
+            // Handle the case where JSON decoding failed
+            // For example, log an error or provide a default behavior
+        }
+    }
     return SuccessResponse("all student data",$data);
 }
 else{
