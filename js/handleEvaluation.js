@@ -12,18 +12,24 @@ const selects = document.querySelectorAll('select');
 const inputs = document.querySelectorAll('input');
 const button = document.querySelector('button');
 
-replacements.forEach((replacement) => {
-	replacement.onclick = () => {
-		replacement.classList.toggle('show');
-		replacement.children[0].classList.toggle('show');
+const handleCheckboxes = () => {
+	const checkboxs = document.querySelectorAll('input[type="checkbox"]');
+	const replacements = document.querySelectorAll('.checkbox_replacement');
+	replacements.forEach((replacement) => {
+		replacement.onclick = () => {
+			checkboxs.forEach((checkbox) => {
+				if (replacement.getAttribute('data-name') === checkbox.name) {
+					checkbox.click();
+					console.log('checked');
+					replacement.classList.toggle('show');
+					replacement.children[0].classList.toggle('show');
+				}
+			});
+		};
+	});
+};
 
-		checkboxs.forEach((checkbox) => {
-			if (replacement.getAttribute('data-name') === checkbox.name) {
-				checkbox.click();
-			}
-		});
-	};
-});
+handleCheckboxes();
 
 window.onload = () => {
 	fetch('https://api.alquran.cloud/v1/meta')
@@ -34,7 +40,7 @@ window.onload = () => {
 			let html = `<option value="chooseSurah" disabled selected> إختر السورة</option>`;
 			let quran = data.data.surahs.references;
 			quran.map((surah) => {
-				html += `<option data-id=${surah.number} value=${surah.name}>${surah.name}</option>`;
+				html += `<option data-id=${surah.number} value=${surah.number}>${surah.name}</option>`;
 			});
 			fromSurah.innerHTML = html;
 			toSurah.innerHTML = html;
@@ -76,10 +82,13 @@ const getAyasNumber = (e) => {
 const sendData = (e) => {
 	e.preventDefault();
 	const formData = new FormData();
-	let behavior = {};
-	formData.append('id', '6');
+	let behavior = [];
+	formData.append('id', '13');
 	inputs.forEach((input) => {
-		behavior[input.name] = input.value;
+		// behavior[input.name] = input.value;
+		if (input.checked) {
+			behavior.push(input.name);
+		}
 	});
 	formData.append('behavior', behavior);
 	selects.forEach((select) => {
@@ -102,4 +111,6 @@ fromSurah.addEventListener('change', getAyasNumber);
 toSurah.addEventListener('change', getAyasNumber);
 revFromSurah.addEventListener('change', getAyasNumber);
 revToSurah.addEventListener('change', getAyasNumber);
-button.addEventListener('click', sendData);
+if (button) {
+	button.addEventListener('click', sendData);
+}

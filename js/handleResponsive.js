@@ -22,7 +22,6 @@ close.addEventListener('click', closeSidebar);
 
 const getUserName = () => {
 	const type = window.localStorage.getItem('type');
-	console.log('hi');
 	requestData(`${type}/${type}data.php`, { method: 'GET' }).then((data) => {
 		const name = data.data.name;
 		username.innerText = name;
