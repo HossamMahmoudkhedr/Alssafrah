@@ -25,40 +25,41 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
     $stm_students=mysqli_prepare($con,$query);
     if($stm_students)
     {
-        mysqli_stmt_bind_param($stm_students,'i',$id);
-        mysqli_stmt_execute($stm_students);
-        $result = mysqli_stmt_get_result($stm_students);
-        $student = mysqli_fetch_assoc($result);
-        $new_sura_start_name=(isset($_POST['new_sura_start_name']))?$_POST['new_sura_start_name']:$student['new_sura_start_name'];
-        $new_sura_start_number=(isset($_POST['new_sura_start_number']))?$_POST['new_sura_start_number']:$student['new_sura_start_number'];
-        $new_sura_end_name=(isset($_POST['new_sura_end_name']))?$_POST['new_sura_end_name']:$student['new_sura_end_name'];
-        $new_sura_end_number=(isset($_POST['new_sura_end_number']))?$_POST['new_sura_end_number']:$studeny['new_sura_end_number'];
-        $revision_sura_start_name=(isset($_POST['revision_sura_start_name']))?$_POST['revision_sura_start_name']:$studeny['revision_sura_start_name'];
-        $revision_sura_start_number=(isset($_POST['revision_sura_start_number']))?$_POST['revision_sura_start_number']:$studeny['revision_sura_start_number'];
-        $revision_sura_end_name=(isset($_POST['revision_sura_end_name']))?$_POST['revision_sura_end_name']:$studeny['revision_sura_end_name'];
-        $revision_sura_end_number=(isset($_POST['revision_sura_end_number']))?$_POST['revision_sura_end_number']:$studeny['revision_sura_end_number'];
-        $behavior=(isset($_POST['behavior']))?$_POST['behavior']:null;
-        //$string = implode(', ', $behavior);
-        if($new_sura_start_name!=null && $new_sura_end_name===$new_sura_start_name)
-        {
-            if($new_sura_start_number>$new_sura_end_number)
-            {
-                $errors[]=['logic error'=>'sura start number must be less than sura end number'];
-            }
-        }
-        if($revision_sura_start_name!=null && $revision_sura_end_name===$revision_sura_start_name)
-        {
-            if($revision_sura_start_number>$revision_sura_end_number)
-            {
-                $errors[]=['logic error'=>'sura start number must be less than sura end number'];
-            }
-        }
-        if(!empty($errors))
-        {
-            return ValidationResponse("validation errors",$errors);
-        }
+      
         if($student)
         {
+            mysqli_stmt_bind_param($stm_students,'i',$id);
+            mysqli_stmt_execute($stm_students);
+            $result = mysqli_stmt_get_result($stm_students);
+            $student = mysqli_fetch_assoc($result);
+            $new_sura_start_name=(isset($_POST['new_sura_start_name']))?$_POST['new_sura_start_name']:$student['new_sura_start_name'];
+            $new_sura_start_number=(isset($_POST['new_sura_start_number']))?$_POST['new_sura_start_number']:$student['new_sura_start_number'];
+            $new_sura_end_name=(isset($_POST['new_sura_end_name']))?$_POST['new_sura_end_name']:$student['new_sura_end_name'];
+            $new_sura_end_number=(isset($_POST['new_sura_end_number']))?$_POST['new_sura_end_number']:$studeny['new_sura_end_number'];
+            $revision_sura_start_name=(isset($_POST['revision_sura_start_name']))?$_POST['revision_sura_start_name']:$studeny['revision_sura_start_name'];
+            $revision_sura_start_number=(isset($_POST['revision_sura_start_number']))?$_POST['revision_sura_start_number']:$studeny['revision_sura_start_number'];
+            $revision_sura_end_name=(isset($_POST['revision_sura_end_name']))?$_POST['revision_sura_end_name']:$studeny['revision_sura_end_name'];
+            $revision_sura_end_number=(isset($_POST['revision_sura_end_number']))?$_POST['revision_sura_end_number']:$studeny['revision_sura_end_number'];
+            $behavior=(isset($_POST['behavior']))?$_POST['behavior']:null;
+            //$string = implode(', ', $behavior);
+            if($new_sura_start_name!=null && $new_sura_end_name===$new_sura_start_name)
+            {
+                if($new_sura_start_number>$new_sura_end_number)
+                {
+                    $errors[]=['logic error'=>'sura start number must be less than sura end number'];
+                }
+            }
+            if($revision_sura_start_name!=null && $revision_sura_end_name===$revision_sura_start_name)
+            {
+                if($revision_sura_start_number>$revision_sura_end_number)
+                {
+                    $errors[]=['logic error'=>'sura start number must be less than sura end number'];
+                }
+            }
+            if(!empty($errors))
+            {
+                return ValidationResponse("validation errors",$errors);
+            }
             $query="UPDATE students set new_sura_start_name=?, new_sura_start_number=?, new_sura_end_name=?, new_sura_end_number=?
             ,revision_sura_start_name=?,revision_sura_start_number=?,revision_sura_end_name=?,revision_sura_end_number=?,behavior=? WHERE id=?";
             $stm_student = mysqli_prepare($con, $query);
