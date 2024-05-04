@@ -15,7 +15,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET')
     {
         return ValidationResponse("validation errors",$errors);
     }
-    $id=$_GET['id'];
+    $id=$_SESSION['id'];
     $query="SELECT * FROM teachers WHERE id = ?";
     $stm_teacher= mysqli_prepare($con,$query);
     $data=[];

@@ -26,7 +26,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET') {
     }
 
     // Assigning variable from GET data
-    $id=$_GET['id'];
+    $id=$_SESSION['id'];;
 
     // Get admin data from database based on provided id
     $query="SELECT * FROM admins WHERE id = ?";

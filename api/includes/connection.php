@@ -8,4 +8,3 @@ $con=mysqli_connect($host,$user_name,$password,$name);//make the mysql connectio
 if (!$con) {//check the connection
     die("Connection failed: " . mysqli_connect_error());
 }
-?>
