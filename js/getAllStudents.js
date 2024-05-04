@@ -12,7 +12,7 @@ window.onload = () => {
 		let html = '';
 		studnets.map((studnet) => {
 			html += `
-                <div class="student_bar flex-lg-row flex-column gap-2 gap-lg-0">
+                <div class="student_bar flex-lg-row flex-column gap-2 gap-lg-0 px-3">
 					<p class="mb-0 px-5">${studnet.name}</p>
 					<a
 						href="${
