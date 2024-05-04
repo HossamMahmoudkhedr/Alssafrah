@@ -14,6 +14,8 @@ const toAyaNum = document.getElementById('toAyaNum');
 const selects = document.querySelectorAll('select');
 const inputs = document.querySelectorAll('input');
 const button = document.querySelector('button');
+const danger = document.querySelector('.alert-danger');
+const success = document.querySelector('.alert-success');
 
 const handleCheckboxes = () => {
 	const checkboxs = document.querySelectorAll('input[type="checkbox"]');
@@ -88,9 +90,6 @@ const getAyasNumber = (e) => {
 			});
 	}
 };
-
-const danger = document.querySelector('.alert-danger');
-const success = document.querySelector('.alert-success');
 
 const sendData = (e) => {
 	let valid = false;

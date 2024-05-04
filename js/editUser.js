@@ -6,6 +6,8 @@ const tabelBody = document.querySelector('.table_body');
 const inputs = document.querySelectorAll('input');
 const button = document.querySelector('button');
 const selectHalaka = document.querySelector('.select_halaka');
+const danger = document.querySelector('.alert-danger');
+const success = document.querySelector('.alert-success');
 
 let url = '';
 let editUrl = '';
@@ -42,6 +44,19 @@ const edit = (id) => {
 			requestData(editUrl, { method: 'POST', body: formData }).then((data) => {
 				getUsers(addTeacher, addParent, addStudent);
 				setMode('insert');
+				if (data.success) {
+					success.classList.remove('d-none');
+					success.innerText = data.message;
+					setTimeout(() => {
+						success.classList.add('d-none');
+					}, 3000);
+				} else {
+					danger.classList.remove('d-none');
+					danger.innerText = data.message;
+					setTimeout(() => {
+						danger.classList.add('d-none');
+					}, 3000);
+				}
 				inputs.forEach((input) => {
 					input.value = '';
 				});
