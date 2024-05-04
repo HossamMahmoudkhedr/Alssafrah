@@ -15,11 +15,34 @@ const elements = [fromSurah, toSurah, revFromSurah, revToSurah];
 const inputs = document.querySelectorAll('input');
 const checkboxes = document.querySelectorAll('[type="checkbox"]');
 window.onload = () => {
-	const type = window.localStorage.getItem('type');
-	requestData(`${type}/${type}data.php`, { method: 'GET' }).then((data) => {
+	let type = window.localStorage.getItem('type');
+	// let theDatat;
+	// if (type === 'student') {
+	//     theDatat = 'studentdata';
+	// } else if (type === 'parent') {
+	//     theDatat = 'parentchild';
+	// } else if (type === 'teacher') {
+	//     theDatat = 'studentdata';
+	// }
+
+	requestData(
+		`${type}/${type === 'parent' ? 'parentchild' : 'studentdata'}.php${
+			type === 'parent' || type === 'teacher'
+				? `?id=${window.localStorage.getItem('studentId')}`
+				: ''
+		}`,
+		{ method: 'GET' }
+	).then((data) => {
+		let student;
+		if (type === 'student' || type === 'teacher') {
+			student = data.data;
+		} else if (type === 'parent') {
+			student = data.data[0];
+		}
+
 		keys.map((key, i) => {
-			const theKey = data.data[key];
-			fetch(`https://api.alquran.cloud/v1/surah/${data.data[key]}`)
+			const theKey = student[key];
+			fetch(`https://api.alquran.cloud/v1/surah/${student[key]}`)
 				.then((response) => {
 					return response.json();
 				})
@@ -30,11 +53,11 @@ window.onload = () => {
 				});
 			inputs.forEach((input) => {
 				if (input.value === '') {
-					input.value = data.data[input.name];
+					input.value = student[input.name];
 				}
 			});
 
-			const behaviorList = data.data.behavior.split(',');
+			const behaviorList = student.behavior.split(',');
 
 			checkboxes.forEach((checkbox, i) => {
 				if (behaviorList.includes(checkbox.name)) {

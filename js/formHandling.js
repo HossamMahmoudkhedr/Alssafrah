@@ -6,6 +6,8 @@ import { getUserType } from './addUsers.js';
 const form = document.querySelector('form');
 const input = document.querySelectorAll('input');
 const selectHalaka = document.querySelector('.select_halaka');
+const success = document.querySelector('.alert-success');
+const danger = document.querySelector('.alert-danger');
 
 const formData = new FormData();
 
@@ -31,6 +33,19 @@ form.addEventListener('submit', (e) => {
 		}
 		requestData(url, { method: 'POST', body: formData }).then((data) => {
 			console.log(data);
+			if (data.success) {
+				success.classList.remove('d-none');
+				success.innerText = data.message;
+				setTimeout(() => {
+					success.classList.add('d-none');
+				}, 3000);
+			} else {
+				danger.classList.remove('d-none');
+				danger.innerText = data.message;
+				setTimeout(() => {
+					danger.classList.add('d-none');
+				}, 3000);
+			}
 			getUsers(addTeacher, addParent, addStudent);
 			input.forEach((el) => {
 				el.value = '';

@@ -16,6 +16,18 @@
 			rel="stylesheet" />
 	</head>
 	<body>
+		<div
+			class="d-none alert alert-success position-fixed"
+			role="alert"
+			style="left: 20px; bottom: 20px; z-index: 2">
+			تم اضافة التقييم بنجاح
+		</div>
+		<div
+			class="d-none alert alert-danger position-fixed"
+			role="alert"
+			style="left: 20px; bottom: 20px; z-index: 2">
+			من فضلك قم بادخال باقي البيانات
+		</div>
 		<span class="menu"
 			><svg
 				width="42"
@@ -67,7 +79,9 @@
 		<div class="content">
 			<form class="d-flex flex-column gap-3 text-center py-3 px-lg-5 px-3">
 				<div class="title padding-radius">
-					<p class="mb-0">عبدالله أحمد</p>
+					<p
+						class="mb-0"
+						id="studentUsername"></p>
 				</div>
 				<!-- Start New Mem -->
 				<div class="d-flex flex-column gap-2">
@@ -290,11 +304,18 @@
 						</div>
 					</div>
 				</div>
-				<button
-					class="save"
-					type="submit">
-					حفظ
-				</button>
+				<div class="d-flex justify-content-between align-items-center">
+					<button
+						class="save"
+						type="submit">
+						حفظ
+					</button>
+					<a
+						class="save"
+						href="./studentResults.html">
+						عرض تقييم الطالب
+					</a>
+				</div>
 			</form>
 		</div>
 		<script src="../bootstrap/js/bootstrap.bundle.min.js"></script>

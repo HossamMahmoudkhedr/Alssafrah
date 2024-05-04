@@ -1,5 +1,8 @@
+import { requestData } from './APIHandle.js';
+
 const checkboxs = document.querySelectorAll('input[type="checkbox"]');
 const replacements = document.querySelectorAll('.checkbox_replacement');
+const studentUserName = document.getElementById('studentUsername');
 
 const fromSurah = document.getElementById('fromSurah');
 const fromAyaNum = document.getElementById('fromAyaNum');
@@ -32,6 +35,13 @@ const handleCheckboxes = () => {
 handleCheckboxes();
 
 window.onload = () => {
+	requestData(
+		`teacher/studentdata.php?id=${window.localStorage.getItem('studentId')}`
+	).then((data) => {
+		const student = data.data;
+		studentUserName.innerText = student.name;
+	});
+
 	fetch('https://api.alquran.cloud/v1/meta')
 		.then((response) => {
 			return response.json();
@@ -79,11 +89,15 @@ const getAyasNumber = (e) => {
 	}
 };
 
+const danger = document.querySelector('.alert-danger');
+const success = document.querySelector('.alert-success');
+
 const sendData = (e) => {
+	let valid = false;
 	e.preventDefault();
 	const formData = new FormData();
 	let behavior = [];
-	formData.append('id', '13');
+	formData.append('id', window.localStorage.getItem('studentId'));
 	inputs.forEach((input) => {
 		// behavior[input.name] = input.value;
 		if (input.checked) {
@@ -92,19 +106,36 @@ const sendData = (e) => {
 	});
 	formData.append('behavior', behavior);
 	selects.forEach((select) => {
-		formData.append(select.name, select.value);
+		if (
+			select.value &&
+			(select.value === 'chooseSurah' || select.value === 'ayaNum')
+		) {
+			danger.classList.remove('d-none');
+			setTimeout(() => {
+				danger.classList.add('d-none');
+			}, 3000);
+			valid = false;
+		} else {
+			formData.append(select.name, select.value);
+			valid = true;
+		}
 	});
-
-	fetch('http://localhost/php/Alssafrah/api/teacher/evaluatestudent.php', {
-		method: 'POST',
-		body: formData,
-	})
-		.then((response) => {
-			return response.json();
+	if (valid) {
+		fetch('http://localhost/php/Alssafrah/api/teacher/evaluatestudent.php', {
+			method: 'POST',
+			body: formData,
 		})
-		.then((data) => {
-			console.log(data);
-		});
+			.then((response) => {
+				return response.json();
+			})
+			.then((data) => {
+				console.log(data);
+				success.classList.remove('d-none');
+				setTimeout(() => {
+					success.classList.add('d-none');
+				}, 3000);
+			});
+	}
 };
 
 fromSurah.addEventListener('change', getAyasNumber);
