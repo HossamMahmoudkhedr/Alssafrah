@@ -73,7 +73,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
                     $result = mysqli_stmt_get_result($stm_ssn);
                     $student_ssn = mysqli_fetch_assoc($result);
                     if ($student_ssn && $student_ssn['id'] !== $id) {
-                        return FailedResponse('This ssn is already in use');
+                        return FailedResponse('رقم الهويه مستخدم من قبل');
                     }
                 } 
             }

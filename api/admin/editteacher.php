@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $result = mysqli_stmt_get_result($stm_email);
                     $teacher_email = mysqli_fetch_assoc($result);
                     if ($teacher_email && $teacher_email['id'] !== $id) {
-                        return FailedResponse('البريد الالكتروني مستخدم بل فعل');
+                        return FailedResponse(' البريد الالكتروني مستخدم من قبل');
                     }
                 } 
             }
@@ -101,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $result = mysqli_stmt_get_result($stm_alhalka);
                 $teacher_alhalka = mysqli_fetch_assoc($result);
                 if ($teacher_alhalka && $teacher_alhalka['id'] !== $id) {
-                    return FailedResponse('رقم الحلقه مستخدم');
+                    return FailedResponse('رقم الحلقه مستخدم من قبل' );
                 }
             } 
             if ($password) {
