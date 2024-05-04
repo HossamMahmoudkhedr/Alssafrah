@@ -43,13 +43,21 @@ const edit = (id) => {
 			}
 			requestData(editUrl, { method: 'POST', body: formData }).then((data) => {
 				getUsers(addTeacher, addParent, addStudent);
-				setMode('insert');
+
 				if (data.success) {
 					success.classList.remove('d-none');
 					success.innerText = data.message;
 					setTimeout(() => {
 						success.classList.add('d-none');
 					}, 3000);
+					inputs.forEach((input) => {
+						input.value = '';
+					});
+					if (user === 'addStudent') {
+						selectHalaka.value = '1';
+					}
+					setMode('insert');
+					button.innerText = 'إضافة';
 				} else {
 					danger.classList.remove('d-none');
 					danger.innerText = data.message;
@@ -57,13 +65,6 @@ const edit = (id) => {
 						danger.classList.add('d-none');
 					}, 3000);
 				}
-				inputs.forEach((input) => {
-					input.value = '';
-				});
-				if (user === 'addStudent') {
-					selectHalaka.value = '1';
-				}
-				button.innerText = 'إضافة';
 			});
 		};
 	});

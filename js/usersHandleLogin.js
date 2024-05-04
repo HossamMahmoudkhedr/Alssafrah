@@ -6,6 +6,7 @@ const form = document.querySelector('form');
 // const email = document.querySelector('#email');
 // const password = document.querySelector('#password');
 const input = document.querySelectorAll('input');
+const danger = document.querySelector('.alert-danger');
 const formData = new FormData();
 
 // Here we get the email value and save it in the formData object
@@ -45,6 +46,9 @@ form.addEventListener('submit', (e) => {
 		if (data.success) {
 			window.localStorage.setItem('type', data.data.type);
 			window.location.href = `http://localhost/php/Alssafrah/${url}`;
+		} else {
+			danger.classList.remove('d-none');
+			danger.innerText = data.message;
 		}
 	});
 });
