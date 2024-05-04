@@ -43,7 +43,8 @@ form.addEventListener('submit', (e) => {
 	}).then((data) => {
 		console.log(data);
 		if (data.success) {
-			// window.location.href = `http://localhost/php/Alssafrah/${url}`;
+			window.localStorage.setItem('type', data.data.type);
+			window.location.href = `http://localhost/php/Alssafrah/${url}`;
 		}
 	});
 });
