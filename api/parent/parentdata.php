@@ -5,8 +5,6 @@ session_start();
 if($_SERVER['REQUEST_METHOD'] === 'GET')
 {
    $errors=[];
-   if(!isset($_GET['id'])||empty('id'))
-        $errors[] = ['id' => 'required'];
    if(!isset($_SESSION['type'])||$_SESSION['type']!='parent')
     {
         $errors[]=['security'=>'unauthorized'];
