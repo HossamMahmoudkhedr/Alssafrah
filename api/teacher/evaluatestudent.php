@@ -25,13 +25,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
     $stm_students=mysqli_prepare($con,$query);
     if($stm_students)
     {
-      
+        mysqli_stmt_bind_param($stm_students,'i',$id);
+        mysqli_stmt_execute($stm_students);
+        $result = mysqli_stmt_get_result($stm_students);
+        $student = mysqli_fetch_assoc($result);
         if($student)
         {
-            mysqli_stmt_bind_param($stm_students,'i',$id);
-            mysqli_stmt_execute($stm_students);
-            $result = mysqli_stmt_get_result($stm_students);
-            $student = mysqli_fetch_assoc($result);
             $new_sura_start_name=(isset($_POST['new_sura_start_name']))?$_POST['new_sura_start_name']:$student['new_sura_start_name'];
             $new_sura_start_number=(isset($_POST['new_sura_start_number']))?$_POST['new_sura_start_number']:$student['new_sura_start_number'];
             $new_sura_end_name=(isset($_POST['new_sura_end_name']))?$_POST['new_sura_end_name']:$student['new_sura_end_name'];
@@ -40,7 +39,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
             $revision_sura_start_number=(isset($_POST['revision_sura_start_number']))?$_POST['revision_sura_start_number']:$studeny['revision_sura_start_number'];
             $revision_sura_end_name=(isset($_POST['revision_sura_end_name']))?$_POST['revision_sura_end_name']:$studeny['revision_sura_end_name'];
             $revision_sura_end_number=(isset($_POST['revision_sura_end_number']))?$_POST['revision_sura_end_number']:$studeny['revision_sura_end_number'];
-            $behavior=(isset($_POST['behavior']))?$_POST['behavior']:null;
+            $behavior=(isset($_POST['behavior']))?$_POST['behavior']:$student['behavior'];
             //$string = implode(', ', $behavior);
             if($new_sura_start_name!=null && $new_sura_end_name===$new_sura_start_name)
             {
