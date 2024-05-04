@@ -34,11 +34,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
             $new_sura_start_name=(isset($_POST['new_sura_start_name']))?$_POST['new_sura_start_name']:$student['new_sura_start_name'];
             $new_sura_start_number=(isset($_POST['new_sura_start_number']))?$_POST['new_sura_start_number']:$student['new_sura_start_number'];
             $new_sura_end_name=(isset($_POST['new_sura_end_name']))?$_POST['new_sura_end_name']:$student['new_sura_end_name'];
-            $new_sura_end_number=(isset($_POST['new_sura_end_number']))?$_POST['new_sura_end_number']:$studeny['new_sura_end_number'];
-            $revision_sura_start_name=(isset($_POST['revision_sura_start_name']))?$_POST['revision_sura_start_name']:$studeny['revision_sura_start_name'];
-            $revision_sura_start_number=(isset($_POST['revision_sura_start_number']))?$_POST['revision_sura_start_number']:$studeny['revision_sura_start_number'];
-            $revision_sura_end_name=(isset($_POST['revision_sura_end_name']))?$_POST['revision_sura_end_name']:$studeny['revision_sura_end_name'];
-            $revision_sura_end_number=(isset($_POST['revision_sura_end_number']))?$_POST['revision_sura_end_number']:$studeny['revision_sura_end_number'];
+            $new_sura_end_number=(isset($_POST['new_sura_end_number']))?$_POST['new_sura_end_number']:$student['new_sura_end_number'];
+            $revision_sura_start_name=(isset($_POST['revision_sura_start_name']))?$_POST['revision_sura_start_name']:$student['revision_sura_start_name'];
+            $revision_sura_start_number=(isset($_POST['revision_sura_start_number']))?$_POST['revision_sura_start_number']:$student['revision_sura_start_number'];
+            $revision_sura_end_name=(isset($_POST['revision_sura_end_name']))?$_POST['revision_sura_end_name']:$student['revision_sura_end_name'];
+            $revision_sura_end_number=(isset($_POST['revision_sura_end_number']))?$_POST['revision_sura_end_number']:$student['revision_sura_end_number'];
             $behavior=(isset($_POST['behavior']))?$_POST['behavior']:$student['behavior'];
             //$string = implode(', ', $behavior);
             if($new_sura_start_name!=null && $new_sura_end_name===$new_sura_start_name)
