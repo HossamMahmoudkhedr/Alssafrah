@@ -38,7 +38,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
         $teacher = mysqli_fetch_assoc($result);
         if(!$teacher)
         {
-            return FailedResponse('فشل التسجيل لا يوجد معلم بذه البيانات ');
+            return FailedResponse('فشل التسجيل لا يوجد معلم بهذه البيانات ');
         }
         if($password!==$teacher['password'])
         {
