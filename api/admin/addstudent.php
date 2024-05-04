@@ -58,7 +58,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // If student with the same ssn already exists, return failed response
         if($student) {
-            return FailedResponse('رقم الهويه موجود بلفعل');
+            return FailedResponse('رقم الهوية موجود بلفعل');
         }
     }
 
@@ -93,7 +93,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // If insertion fails, return failed response
         if (!$result) {
-            return FailedResponse('فشل اضافه الطالب ');
+            return FailedResponse('فشل اضافة الطالب ');
         }
 
         // Check if there's a parent with the same phone number
@@ -122,7 +122,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Return success response
-        return SuccessResponse("تمتت اضافه الطالب بنجاح");
+        return SuccessResponse("تمت اضافة الطالب بنجاح");
     }
 } else {
     // If request method is not POST, return security error

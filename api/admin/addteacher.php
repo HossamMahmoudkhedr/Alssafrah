@@ -118,10 +118,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // If insertion fails, return failed response
         if(!$result) {
-            return FailedResponse('فشل اضافه المعلم');
+            return FailedResponse('فشل اضافة المعلم');
         }
         // Return success response
-        return SuccessResponse("تمت اضافه المعلم");
+        return SuccessResponse("تمت اضافة المعلم");
     }
 } else {
     // If request method is not POST, return security error
