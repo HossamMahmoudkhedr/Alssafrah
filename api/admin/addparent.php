@@ -36,7 +36,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
         $parent = mysqli_fetch_assoc($result);
         if($parent)
         {
-            return FailedResponse('هذا الجوال مستخدم بلفعل');
+            return FailedResponse('هذا الجوال مستخدم من قبل');
         }
     }
     //insert data into the table 
