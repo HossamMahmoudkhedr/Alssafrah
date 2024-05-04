@@ -78,17 +78,19 @@
 						>
 						<div class="d-flex gap-2 w-100">
 							<input
+								data-name="new_sura_start"
 								type="text"
 								disabled
 								class="w-75 padding-radius"
-								name="fromSurah"
+								name="new_sura_start_name"
 								id="fromSurah" />
 
 							<input
+								data-name="new_sura_start"
 								type="text"
 								disabled
 								class="w-25 padding-radius"
-								name="fromAyaNum"
+								name="new_sura_start_number"
 								id="fromAyaNum" />
 						</div>
 					</div>
@@ -100,17 +102,19 @@
 						>
 						<div class="d-flex gap-2 w-100">
 							<input
+								data-name="new_sura_end"
 								type="text"
 								disabled
 								class="w-75 padding-radius"
-								name="toSurah"
+								name="new_sura_end_name"
 								id="toSurah" />
 
 							<input
+								data-name="new_sura_end"
 								type="text"
 								disabled
 								class="w-25 padding-radius"
-								name="toAyaNum"
+								name="new_sura_end_number"
 								id="toAyaNum" />
 						</div>
 					</div>
@@ -129,17 +133,19 @@
 						>
 						<div class="d-flex gap-2 w-100">
 							<input
+								data-name="revision_sura_start"
 								type="text"
 								disabled
 								class="w-75 padding-radius"
-								name="revFromSurah"
+								name="revision_sura_start_name"
 								id="revFromSurah" />
 
 							<input
+								data-name="revision_sura_start"
 								type="text"
 								disabled
 								class="w-25 padding-radius"
-								name="revFromAyaNum"
+								name="revision_sura_start_number"
 								id="revFromAyaNum" />
 						</div>
 					</div>
@@ -151,17 +157,19 @@
 						>
 						<div class="d-flex gap-2 w-100">
 							<input
+								data-name="revision_sura_end"
 								type="text"
 								disabled
 								class="w-75 padding-radius"
-								name="revToSurah"
+								name="revision_sura_end_name"
 								id="revToSurah" />
 
 							<input
+								data-name="revision_sura_end"
 								type="text"
 								disabled
 								class="w-25 padding-radius"
-								name="revToAyaNum"
+								name="revision_sura_end_number"
 								id="revToAyaNum" />
 						</div>
 					</div>
@@ -172,29 +180,105 @@
 						<p class="mb-0">ملاحظات السلوك</p>
 					</div>
 					<div class="d-flex gap-1 align-items-center flex-column flex-lg-row">
-						<div class="title padding-radius flex-alignments w-100">
+						<div
+							class="title padding-radius flex-alignments align-items-center w-100">
 							<label for="">الحفظ بالبيت</label>
 							<input
 								disabled
-								type="checkbox" />
+								type="checkbox"
+								name="home_memorize"
+								hidden />
+							<div
+								class="checkbox_replacement"
+								data-name="home_memorize">
+								<span>
+									<svg
+										width="17"
+										height="13"
+										viewBox="0 0 17 13"
+										fill="none"
+										xmlns="http://www.w3.org/2000/svg">
+										<path
+											d="M5.77395 12.4281L0.248949 6.90313C-0.082983 6.57119 -0.082983 6.033 0.248949 5.70104L1.451 4.49895C1.78293 4.16699 2.32116 4.16699 2.65309 4.49895L6.375 8.22083L14.3469 0.248949C14.6788 -0.082983 15.2171 -0.082983 15.549 0.248949L16.7511 1.45104C17.083 1.78297 17.083 2.32116 16.7511 2.65312L6.97604 12.4282C6.64408 12.7601 6.10589 12.7601 5.77395 12.4281Z"
+											fill="white" />
+									</svg>
+								</span>
+							</div>
 						</div>
-						<div class="title padding-radius flex-alignments w-100">
+						<div
+							class="title padding-radius flex-alignments align-items-center w-100">
 							<label for="">كثرة الحركة</label>
 							<input
+								type="checkbox"
+								name="movement"
 								disabled
-								type="checkbox" />
+								hidden />
+							<div
+								class="checkbox_replacement"
+								data-name="movement">
+								<span>
+									<svg
+										width="17"
+										height="13"
+										viewBox="0 0 17 13"
+										fill="none"
+										xmlns="http://www.w3.org/2000/svg">
+										<path
+											d="M5.77395 12.4281L0.248949 6.90313C-0.082983 6.57119 -0.082983 6.033 0.248949 5.70104L1.451 4.49895C1.78293 4.16699 2.32116 4.16699 2.65309 4.49895L6.375 8.22083L14.3469 0.248949C14.6788 -0.082983 15.2171 -0.082983 15.549 0.248949L16.7511 1.45104C17.083 1.78297 17.083 2.32116 16.7511 2.65312L6.97604 12.4282C6.64408 12.7601 6.10589 12.7601 5.77395 12.4281Z"
+											fill="white" />
+									</svg>
+								</span>
+							</div>
 						</div>
-						<div class="title padding-radius flex-alignments w-100">
+						<div
+							class="title padding-radius flex-alignments align-items-center w-100">
 							<label for="">النوم </label>
 							<input
+								type="checkbox"
+								name="sleeping"
 								disabled
-								type="checkbox" />
+								hidden />
+							<div
+								class="checkbox_replacement"
+								data-name="sleeping">
+								<span>
+									<svg
+										width="17"
+										height="13"
+										viewBox="0 0 17 13"
+										fill="none"
+										xmlns="http://www.w3.org/2000/svg">
+										<path
+											d="M5.77395 12.4281L0.248949 6.90313C-0.082983 6.57119 -0.082983 6.033 0.248949 5.70104L1.451 4.49895C1.78293 4.16699 2.32116 4.16699 2.65309 4.49895L6.375 8.22083L14.3469 0.248949C14.6788 -0.082983 15.2171 -0.082983 15.549 0.248949L16.7511 1.45104C17.083 1.78297 17.083 2.32116 16.7511 2.65312L6.97604 12.4282C6.64408 12.7601 6.10589 12.7601 5.77395 12.4281Z"
+											fill="white" />
+									</svg>
+								</span>
+							</div>
 						</div>
-						<div class="title padding-radius flex-alignments w-100">
+						<div
+							class="title padding-radius flex-alignments align-items-center w-100">
 							<label for="">التأخر</label>
 							<input
+								type="checkbox"
+								name="delay"
 								disabled
-								type="checkbox" />
+								hidden />
+							<div
+								class="checkbox_replacement"
+								data-name="delay">
+								<span>
+									<svg
+										width="17"
+										height="13"
+										viewBox="0 0 17 13"
+										fill="none"
+										xmlns="http://www.w3.org/2000/svg">
+										<path
+											d="M5.77395 12.4281L0.248949 6.90313C-0.082983 6.57119 -0.082983 6.033 0.248949 5.70104L1.451 4.49895C1.78293 4.16699 2.32116 4.16699 2.65309 4.49895L6.375 8.22083L14.3469 0.248949C14.6788 -0.082983 15.2171 -0.082983 15.549 0.248949L16.7511 1.45104C17.083 1.78297 17.083 2.32116 16.7511 2.65312L6.97604 12.4282C6.64408 12.7601 6.10589 12.7601 5.77395 12.4281Z"
+											fill="white" />
+									</svg>
+								</span>
+							</div>
 						</div>
 					</div>
 				</div>

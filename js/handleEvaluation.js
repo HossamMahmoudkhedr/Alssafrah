@@ -34,7 +34,7 @@ window.onload = () => {
 			let html = `<option value="chooseSurah" disabled selected> إختر السورة</option>`;
 			let quran = data.data.surahs.references;
 			quran.map((surah) => {
-				html += `<option data-id=${surah.number} value=${surah.number}>${surah.name}</option>`;
+				html += `<option data-id=${surah.number} value=${surah.name}>${surah.name}</option>`;
 			});
 			fromSurah.innerHTML = html;
 			toSurah.innerHTML = html;

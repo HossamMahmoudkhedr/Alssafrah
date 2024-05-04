@@ -20,14 +20,13 @@ const closeSidebar = () => {
 menu.addEventListener('click', openSidebar);
 close.addEventListener('click', closeSidebar);
 
-window.onload = () => {
+const getUserName = () => {
 	const type = window.localStorage.getItem('type');
-	// http://localhost/php/Alssafrah/api/student/studentdata.php
+	console.log('hi');
 	requestData(`${type}/${type}data.php`, { method: 'GET' }).then((data) => {
 		const name = data.data.name;
 		username.innerText = name;
 	});
 };
 
-window.localStorage.removeItem('name');
-window.localStorage.removeItem('id');
+window.addEventListener('DOMContentLoaded', getUserName);
