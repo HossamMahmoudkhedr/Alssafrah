@@ -1,7 +1,6 @@
 <?php
 include "../includes/connection.php";
 include "../includes/apiResponse.php";
-include "../includes/setcookie.php";
 if($_SERVER['REQUEST_METHOD'] === 'POST')
 {
    
@@ -36,7 +35,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
             return FailedResponse('فشل تسجيل دخول المستخدم اعد المحاوله بأستخدام رقم هويه صحيح');
         }
         $student['type']='student';
-        setCookies('student');
         $expireTime = 3600 * 24; // 24 hour
         session_set_cookie_params($expireTime);
         session_start();

@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             return FailedResponse('المستخدم غير موجود');
         }
     }
-    return SuccessResponse("Done");
+    return SuccessResponse("تم التعديل");
 }
 else{
     $errors[]=['security'=>'unsuppored method'];

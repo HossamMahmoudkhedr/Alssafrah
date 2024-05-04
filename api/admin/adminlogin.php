@@ -2,8 +2,6 @@
 // Including necessary files
 include "../includes/connection.php"; // Include database connection file
 include "../includes/apiResponse.php"; // Include API response file
-include "../includes/setcookie.php"; // Include setcookie utility
-
 // Check if the request method is POST
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
     // User validation
@@ -65,9 +63,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Add admin type
         $admin['type']='admin';
-
-        // Set cookies for admin
-        setCookies('admin');
 
         // Set session expiration time
         $expireTime = 3600 * 24; // 24 hours

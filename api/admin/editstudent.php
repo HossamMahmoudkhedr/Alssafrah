@@ -99,9 +99,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
         }
         else
         {
-            return FailedResponse('User not found');
+            return FailedResponse('الطاب غير موجود');
         }
-        return SuccessResponse("student successfully updated");
+        return SuccessResponse("تم التعديل");
     }
 }
 else{

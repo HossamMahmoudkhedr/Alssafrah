@@ -1,7 +1,6 @@
 <?php
 include "../includes/connection.php";
 include "../includes/apiResponse.php";
-include "../includes/setcookie.php";
 
 if($_SERVER['REQUEST_METHOD'] === 'POST')
 {
@@ -52,7 +51,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
         setCookies('teacher');
         $expireTime = 3600 * 24; 
         session_set_cookie_params($expireTime);
-        session_start();
+      
         $_SESSION['id'] =$teacher['id'];//log the teacher and save the valus of important things
         $_SESSION['type']='teacher';
        return SuccessResponse("Done",$teacher);

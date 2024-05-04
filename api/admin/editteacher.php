@@ -121,8 +121,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $result = mysqli_stmt_get_result($stm_update);
             } 
         }
+        else{
+            return FailedResponse("المعلم غير موجود");
+        }
     }
-    return SuccessResponse("Done");
+    return SuccessResponse("تم التعديل");
 }
 else{
     $errors[]=['security'=>'unsuppored method'];
