@@ -39,6 +39,9 @@ form.addEventListener('submit', (e) => {
 				setTimeout(() => {
 					success.classList.add('d-none');
 				}, 3000);
+				input.forEach((el) => {
+					el.value = '';
+				});
 			} else {
 				danger.classList.remove('d-none');
 				danger.innerText = data.message;
@@ -47,9 +50,6 @@ form.addEventListener('submit', (e) => {
 				}, 3000);
 			}
 			getUsers(addTeacher, addParent, addStudent);
-			input.forEach((el) => {
-				el.value = '';
-			});
 		});
 	}
 });
