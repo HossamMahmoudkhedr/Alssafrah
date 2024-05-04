@@ -34,7 +34,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // If there are validation errors, return validation response
     if(!empty($errors)) {
-        return ValidationResponse("validation errors", $errors);
+        return ValidationResponse("خطأ في ادخال البيانات",$errors);
     }
 
     // Assigning variables from POST data

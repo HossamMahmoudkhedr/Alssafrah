@@ -18,7 +18,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
     }
     if(!empty($errors))
     {
-        return ValidationResponse("validation errors",$errors);
+        return ValidationResponse("خطأ في ادخال البيانات",$errors);
     }
     $name=$_POST['name'];
     $password=$_POST['password'];
