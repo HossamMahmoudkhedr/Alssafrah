@@ -48,7 +48,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
         unset($teacher['password']);
         $teacher['type']='teacher';
         $teacher['type']='teacher';
-        setCookies('teacher');
+        
         $expireTime = 3600 * 24; 
         session_set_cookie_params($expireTime);
       
