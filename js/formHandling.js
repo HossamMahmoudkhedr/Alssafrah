@@ -8,6 +8,9 @@ const input = document.querySelectorAll('input');
 const selectHalaka = document.querySelector('.select_halaka');
 const success = document.querySelector('.alert-success');
 const danger = document.querySelector('.alert-danger');
+const phone = document.getElementById('phone');
+const ssn = document.getElementById('ssn');
+const halaka = document.querySelector('.halaka');
 
 const formData = new FormData();
 
@@ -18,6 +21,10 @@ input.forEach((el) => {
 });
 
 let url = '';
+
+const makeInputNumbers = (e) => {
+	if (!/[0-9]/g.test(e.key) && e.key !== 'Backspace') e.preventDefault();
+};
 
 form.addEventListener('submit', (e) => {
 	e.preventDefault();
@@ -53,3 +60,13 @@ form.addEventListener('submit', (e) => {
 		});
 	}
 });
+
+if (phone) {
+	phone.addEventListener('keydown', makeInputNumbers);
+}
+if (ssn) {
+	ssn.addEventListener('keydown', makeInputNumbers);
+}
+if (halaka) {
+	halaka.addEventListener('keydown', makeInputNumbers);
+}
