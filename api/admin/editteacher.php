@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $result = mysqli_stmt_get_result($stm_email);
                     $teacher_email = mysqli_fetch_assoc($result);
                     if ($teacher_email && $teacher_email['id'] !== $id) {
-                        return FailedResponse('This email is already in use');
+                        return FailedResponse('البريد الالكتروني مستخدم بل فعل');
                     }
                 } 
             }
@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $result = mysqli_stmt_get_result($stm_phone);
                 $teacher_phone = mysqli_fetch_assoc($result);
                 if ($teacher_phone && $teacher_phone['id'] !== $id) {
-                    return FailedResponse('This phone number is already in use');
+                    return FailedResponse('رقم الجوال مستخدم من قبل');
                 }
             }
             // Check if the Alhalka number is already in use by another user
@@ -101,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $result = mysqli_stmt_get_result($stm_alhalka);
                 $teacher_alhalka = mysqli_fetch_assoc($result);
                 if ($teacher_alhalka && $teacher_alhalka['id'] !== $id) {
-                    return FailedResponse('This Alhalka number is already in use');
+                    return FailedResponse('رقم الحلقه مستخدم');
                 }
             } 
             if ($password) {
