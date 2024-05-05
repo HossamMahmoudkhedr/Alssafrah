@@ -18,7 +18,14 @@ if($_SERVER['REQUEST_METHOD'] === 'GET')
     }
     $id=$_GET['id'];
     //$query="SELECT id , name , FROM students ";
-    $query="SELECT students.id,ssn,students.parent_phone,students.name AS name ,  teachers.Alhalka_Number  as alhalka_number FROM students JOIN teachers ON students.teacher_id = teachers.id WHERE  students.id = ?";
+    $query = "SELECT students.id,
+    students.ssn,
+    students.parent_phone,
+    students.name AS name,
+    teachers.Alhalka_Number AS alhalka_number
+    FROM students
+    LEFT JOIN teachers ON students.teacher_id = teachers.id
+    WHERE students.id = ?";
 
     $stm_student= mysqli_prepare($con,$query);
     $data=[];

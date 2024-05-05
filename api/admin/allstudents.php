@@ -21,7 +21,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET')
     students.parent_phone,
     students.ssn,
     IFNULL(teachers.name, '') AS teacher_name,
-    IFNULL(teachers.Alhalka_Number, 'لايوجد') AS Alhalka_Number
+    IFNULL(teachers.Alhalka_Number, '0') AS Alhalka_Number
     FROM students 
     LEFT JOIN teachers ON students.teacher_id = teachers.id;";    
     $stm_students= mysqli_prepare($con,$query);
