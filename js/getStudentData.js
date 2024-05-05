@@ -42,25 +42,27 @@ window.onload = () => {
 
 		keys.map((key, i) => {
 			const theKey = student[key];
-			fetch(`https://api.alquran.cloud/v1/surah/${student[key]}`)
-				.then((response) => {
-					return response.json();
-				})
-				.then((data) => {
-					if (data.data.number == theKey) {
-						elements[i].value = data.data.name;
+			if (student[key]) {
+				fetch(`https://api.alquran.cloud/v1/surah/${student[key]}`)
+					.then((response) => {
+						return response.json();
+					})
+					.then((data) => {
+						if (data.data.number == theKey) {
+							elements[i].value = data.data.name;
+						}
+					});
+				inputs.forEach((input) => {
+					if (input.value === '') {
+						input.value = student[input.name];
 					}
 				});
-			inputs.forEach((input) => {
-				if (input.value === '') {
-					input.value = student[input.name];
-				}
-			});
+			}
 
-			const behaviorList = student.behavior.split(',');
+			const behaviorList = student.behavior && student.behavior.split(',');
 
 			checkboxes.forEach((checkbox, i) => {
-				if (behaviorList.includes(checkbox.name)) {
+				if (behaviorList && behaviorList.includes(checkbox.name)) {
 					checkbox.checked = true;
 				}
 			});
