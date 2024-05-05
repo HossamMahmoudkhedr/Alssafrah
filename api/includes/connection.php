@@ -2,7 +2,7 @@
 $host="localhost";//database host
 $name="Alssafarah";//database name
 $user_name="root";//database username
-$password="2002";//database password
+$password="";//database password
 $con=mysqli_connect($host,$user_name,$password,$name);//make the mysql connection
 
 if (!$con) {//check the connection
