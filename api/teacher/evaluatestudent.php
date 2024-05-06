@@ -39,7 +39,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
             $revision_sura_start_number=(isset($_POST['revision_sura_start_number']))?$_POST['revision_sura_start_number']:$student['revision_sura_start_number'];
             $revision_sura_end_name=(isset($_POST['revision_sura_end_name']))?$_POST['revision_sura_end_name']:$student['revision_sura_end_name'];
             $revision_sura_end_number=(isset($_POST['revision_sura_end_number']))?$_POST['revision_sura_end_number']:$student['revision_sura_end_number'];
-            $behavior=(isset($_POST['behavior'])||!empty($_POST['behavior']))?$_POST['behavior']:"";
+            $behavior=(isset($_POST['behavior']))?$_POST['behavior']:"";
             //$string = implode(', ', $behavior);
             if($new_sura_start_name!=null && $new_sura_end_name===$new_sura_start_name)
             {
