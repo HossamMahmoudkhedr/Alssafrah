@@ -39,7 +39,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
             $revision_sura_start_number=(isset($_POST['revision_sura_start_number']))?$_POST['revision_sura_start_number']:$student['revision_sura_start_number'];
             $revision_sura_end_name=(isset($_POST['revision_sura_end_name']))?$_POST['revision_sura_end_name']:$student['revision_sura_end_name'];
             $revision_sura_end_number=(isset($_POST['revision_sura_end_number']))?$_POST['revision_sura_end_number']:$student['revision_sura_end_number'];
-            $behavior=(isset($_POST['behavior'])||!empty($_POST['behavior']))?$_POST['behavior']:"";
+            $tomorrow_sura_start_name=(isset($_POST['tomorrow_sura_start_name']))?$_POST['tomorrow_sura_start_name']:$student['tomorrow_sura_start_name'];
+            $tomorrow_sura_start_number=(isset($_POST['tomorrow_sura_start_number']))?$_POST['tomorrow_sura_start_number']:$student['tomorrow_sura_start_number'];
+            $tomorrow_sura_end_name=(isset($_POST['tomorrow_sura_end_name']))?$_POST['tomorrow_sura_end_name']:$student['tomorrow_sura_end_name'];
+            $tomorrow_sura_end_number=(isset($_POST['tomorrow_sura_end_number']))?$_POST['tomorrow_sura_end_number']:$student['tomorrow_sura_end_number'];
+            $behavior=(isset($_POST['behavior']))?$_POST['behavior']:"";
             //$string = implode(', ', $behavior);
             if($new_sura_start_name!=null && $new_sura_end_name===$new_sura_start_name)
             {
@@ -59,13 +63,25 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
             {
                 return ValidationResponse("validation errors",$errors);
             }
-            $query="UPDATE students set new_sura_start_name=?, new_sura_start_number=?, new_sura_end_name=?, new_sura_end_number=?
-            ,revision_sura_start_name=?,revision_sura_start_number=?,revision_sura_end_name=?,revision_sura_end_number=?,behavior=? WHERE id=?";
+            $query = "UPDATE students 
+          SET new_sura_start_name=?, 
+              new_sura_start_number=?, 
+              new_sura_end_name=?, 
+              new_sura_end_number=?, 
+              revision_sura_start_name=?, 
+              revision_sura_start_number=?, 
+              revision_sura_end_name=?, 
+              revision_sura_end_number=?, 
+              tomorrow_sura_start_name=?, 
+              tomorrow_sura_start_number=?, 
+              tomorrow_sura_end_name=?, 
+              tomorrow_sura_end_number=?, 
+              behavior=? 
+          WHERE id=?";
             $stm_student = mysqli_prepare($con, $query);
             if ($stm_student) {
-                mysqli_stmt_bind_param($stm_student, 'sssssssssi', $new_sura_start_name,$new_sura_start_number,$new_sura_end_name,$new_sura_end_number,$revision_sura_start_name,$revision_sura_start_number,$revision_sura_end_name,$revision_sura_end_number,$behavior,$id);
+                mysqli_stmt_bind_param($stm_student, 'sssssssssssssi', $new_sura_start_name,$new_sura_start_number,$new_sura_end_name,$new_sura_end_number,$revision_sura_start_name,$revision_sura_start_number,$revision_sura_end_name,$revision_sura_end_number,$tomorrow_sura_start_name,$tomorrow_sura_start_number,$tomorrow_sura_end_name,$tomorrow_sura_end_number,$behavior,$id);
                 mysqli_stmt_execute($stm_student);
-                //$result = mysqli_stmt_get_result($stm_student);
             }
         }
         else
