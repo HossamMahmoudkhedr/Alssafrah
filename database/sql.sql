@@ -57,6 +57,10 @@ select * from students;
 select * from teachers;
 #ALTER TABLE parents AUTO_INCREMENT = 1;
 
-
+ALTER TABLE students
+ADD COLUMN tomorrow_sura_start_name VARCHAR(50),
+ADD COLUMN tomorrow_sura_start_number VARCHAR(5),
+ADD COLUMN tomorrow_sura_end_name VARCHAR(50),
+ADD COLUMN tomorrow_sura_end_number VARCHAR(5);
 
 
