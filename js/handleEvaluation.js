@@ -37,6 +37,11 @@ const handleCheckboxes = () => {
 handleCheckboxes();
 
 window.onload = () => {
+	inputs.forEach((input) => {
+		if (input.checked) {
+			input.checked = false;
+		}
+	});
 	requestData(
 		`teacher/studentdata.php?id=${window.localStorage.getItem('studentId')}`
 	).then((data) => {
@@ -103,7 +108,9 @@ const sendData = (e) => {
 			behavior.push(input.name);
 		}
 	});
-	formData.append('behavior', behavior);
+	if (behavior.length !== 0) {
+		formData.append('behavior', behavior);
+	}
 	selects.forEach((select) => {
 		if (
 			select.value &&
