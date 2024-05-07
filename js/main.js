@@ -1,11 +1,11 @@
 import { requestData } from './APIHandle.js';
 import { addParent, addStudent, addTeacher, getUserType } from './addUsers.js';
 
-export let mode = 'insert';
-export const setMode = (value) => {
-	mode = value;
-};
-
+// export let mode = 'insert';
+// export const setMode = (value) => {
+// 	mode = value;
+// };
+window.localStorage.setItem('mode', 'insert');
 // Selecting elements
 const selectHalaka = document.querySelector('.select_halaka');
 

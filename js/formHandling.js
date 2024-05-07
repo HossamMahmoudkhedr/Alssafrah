@@ -1,6 +1,6 @@
 import { requestData } from './APIHandle.js';
 import { addParent, addTeacher, addStudent } from './addUsers.js';
-import { getUsers, mode } from './main.js';
+import { getUsers } from './main.js';
 import { getUserType } from './addUsers.js';
 
 const form = document.querySelector('form');
@@ -11,24 +11,81 @@ const danger = document.querySelector('.alert-danger');
 const phone = document.getElementById('phone');
 const ssn = document.getElementById('ssn');
 const halaka = document.querySelector('.halaka');
-
-const formData = new FormData();
-
-input.forEach((el) => {
-	el.onchange = () => {
-		formData.append(el.name, el.value);
-	};
-});
+const button = document.querySelector('button');
 
 let url = '';
 
 const makeInputNumbers = (e) => {
-	if (!/[0-9]/g.test(e.key) && e.key !== 'Backspace') e.preventDefault();
+	const isNumber = /[0-9]/.test(e.key);
+	const isShortcutKey = e.ctrlKey || e.metaKey;
+	const isBackspace = e.key === 'Backspace' || e.key === 'Delete';
+
+	if (!isNumber && !isShortcutKey && !isBackspace) {
+		e.preventDefault();
+	}
+};
+
+const edit = (id) => {
+	let editUrl = '';
+	const user = getUserType();
+	if (user === 'addTeacher') {
+		url = `admin/getteacher.php?id=${id}`;
+		editUrl = 'admin/editteacher.php';
+	} else if (user === 'addParent') {
+		url = `admin/getparent.php?id=${id}`;
+		editUrl = 'admin/editparent.php';
+	} else if (user === 'addStudent') {
+		url = `admin/getstudent.php?id=${id}`;
+		editUrl = 'admin/editstudent.php';
+	}
+	if (window.localStorage.getItem('mode') === 'edit') {
+		const formData = new FormData();
+		formData.append('id', id);
+		input.forEach((el) => {
+			formData.append(el.name, el.value);
+		});
+		if (user === 'addStudent') {
+			formData.append(selectHalaka.name, selectHalaka.value);
+		}
+		requestData(editUrl, { method: 'POST', body: formData }).then((data) => {
+			getUsers(addTeacher, addParent, addStudent);
+
+			if (data.success) {
+				success.classList.remove('d-none');
+				success.innerText = data.message;
+				setTimeout(() => {
+					success.classList.add('d-none');
+				}, 3000);
+				input.forEach((el) => {
+					el.value = '';
+				});
+				if (user === 'addStudent') {
+					selectHalaka.value = '1';
+				}
+				// setMode('insert');
+				window.localStorage.setItem('mode', 'insert');
+				button.innerText = 'إضافة';
+				formData.forEach((el) => {
+					formData.delete(el.name);
+				});
+			} else {
+				danger.classList.remove('d-none');
+				danger.innerText = data.message;
+				setTimeout(() => {
+					danger.classList.add('d-none');
+				}, 3000);
+			}
+		});
+	}
 };
 
 form.addEventListener('submit', (e) => {
 	e.preventDefault();
-	if (mode === 'insert') {
+	if (window.localStorage.getItem('mode') === 'insert') {
+		const formData = new FormData();
+		input.forEach((el) => {
+			formData.append(el.name, el.value);
+		});
 		let user = getUserType();
 		if (user === 'addTeacher') {
 			url = 'admin/addteacher.php';
@@ -58,6 +115,8 @@ form.addEventListener('submit', (e) => {
 			}
 			getUsers(addTeacher, addParent, addStudent);
 		});
+	} else {
+		edit(window.localStorage.getItem('editID'));
 	}
 });
 
