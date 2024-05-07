@@ -4,14 +4,25 @@ const fromSurah = document.getElementById('fromSurah');
 const toSurah = document.getElementById('toSurah');
 const revFromSurah = document.getElementById('revFromSurah');
 const revToSurah = document.getElementById('revToSurah');
+const tomorrowFromSurah = document.getElementById('tomorrowFromSurah');
+const tomorrowToSurah = document.getElementById('tomorrowToSurah');
 
 const keys = [
 	'new_sura_start_name',
 	'new_sura_end_name',
 	'revision_sura_start_name',
 	'revision_sura_end_name',
+	'tomorrow_sura_start_name',
+	'tomorrow_sura_end_name',
 ];
-const elements = [fromSurah, toSurah, revFromSurah, revToSurah];
+const elements = [
+	fromSurah,
+	toSurah,
+	revFromSurah,
+	revToSurah,
+	tomorrowFromSurah,
+	tomorrowToSurah,
+];
 const inputs = document.querySelectorAll('input');
 const checkboxes = document.querySelectorAll('[type="checkbox"]');
 window.onload = () => {

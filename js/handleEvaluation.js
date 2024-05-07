@@ -9,6 +9,8 @@ const fromAyaNum = document.getElementById('fromAyaNum');
 const revFromSurah = document.getElementById('revFromSurah');
 const revToSurah = document.getElementById('revToSurah');
 const toSurah = document.getElementById('toSurah');
+const tomorrowFromSurah = document.getElementById('tomorrowFromSurah');
+const tomorrowToSurah = document.getElementById('tomorrowToSurah');
 const toAyaNum = document.getElementById('toAyaNum');
 
 const selects = document.querySelectorAll('select');
@@ -63,6 +65,8 @@ window.onload = () => {
 			toSurah.innerHTML = html;
 			revFromSurah.innerHTML = html;
 			revToSurah.innerHTML = html;
+			tomorrowFromSurah.innerHTML = html;
+			tomorrowToSurah.innerHTML = html;
 		});
 };
 
@@ -148,6 +152,8 @@ fromSurah.addEventListener('change', getAyasNumber);
 toSurah.addEventListener('change', getAyasNumber);
 revFromSurah.addEventListener('change', getAyasNumber);
 revToSurah.addEventListener('change', getAyasNumber);
+tomorrowFromSurah.addEventListener('change', getAyasNumber);
+tomorrowToSurah.addEventListener('change', getAyasNumber);
 if (button) {
 	button.addEventListener('click', sendData);
 }
