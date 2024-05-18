@@ -1,5 +1,6 @@
 create database Alssafarah ;
 use Alssafarah;
+
 create table admins
 (
 	id int primary key auto_increment,
@@ -18,6 +19,7 @@ create table teachers
     admin_id int not null ,
     foreign key (admin_id) references admins(id)
 );
+
 create table parents
 (
 	id int primary key auto_increment,
@@ -41,10 +43,6 @@ create table students
     revision_sura_start_number varchar(5) ,
     revision_sura_end_name varchar(50) ,
     revision_sura_end_number varchar(5),
-    tomorrow_sura_start_name VARCHAR(50),
-	tomorrow_sura_start_number VARCHAR(5),
-    tomorrow_sura_end_name VARCHAR(50),
-    tomorrow_sura_end_number VARCHAR(5),
     behavior varchar(250),
     attend bool default false,
     parent_id int ,
@@ -58,8 +56,11 @@ select * from admins;
 select * from parents;
 select * from students;
 select * from teachers;
-use Alssafarah;
 
-
+ALTER TABLE students
+ADD COLUMN tomorrow_sura_start_name VARCHAR(50),
+ADD COLUMN tomorrow_sura_start_number VARCHAR(5),
+ADD COLUMN tomorrow_sura_end_name VARCHAR(50),
+ADD COLUMN tomorrow_sura_end_number VARCHAR(5);
 
 
